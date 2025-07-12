@@ -14,7 +14,7 @@ st.set_page_config(
     layout="wide"
 )
 
-# Custom CSS - Clean professional design
+# Custom CSS - Clean professional design with fixed coloring
 st.markdown("""
 <style>
     /* SOLID COLORS ONLY - NO GRADIENTS! */
@@ -109,6 +109,51 @@ st.markdown("""
         display: inline-block;
     }
     
+    /* WHITE inputs with warm brown border - MAIN AREA */
+    .stTextInput > div > div > input {
+        background-color: white !important;
+        color: #212529 !important;
+        border: 2px solid var(--warm-brown) !important;
+        border-radius: 10px !important;
+        font-weight: 500 !important;
+    }
+    
+    /* MAIN AREA DROPDOWNS - WHITE BACKGROUND */
+    .stSelectbox > div > div {
+        background-color: white !important;
+        border: 2px solid var(--warm-brown) !important;
+        border-radius: 10px !important;
+    }
+    
+    .stSelectbox > div > div > div {
+        background-color: white !important;
+        color: #212529 !important;
+    }
+    
+    /* Dropdown menu items */
+    div[data-baseweb="select"] > div {
+        background-color: white !important;
+        color: #212529 !important;
+    }
+    
+    div[data-baseweb="popover"] {
+        background-color: white !important;
+    }
+    
+    ul[data-baseweb="menu"] {
+        background-color: white !important;
+    }
+    
+    ul[data-baseweb="menu"] li {
+        background-color: white !important;
+        color: #212529 !important;
+    }
+    
+    ul[data-baseweb="menu"] li:hover {
+        background-color: #f8f9fa !important;
+        color: #212529 !important;
+    }
+    
     /* SOLID ORANGE buttons - NO GRADIENT */
     .stButton > button {
         background-color: var(--orange) !important;
@@ -138,6 +183,64 @@ st.markdown("""
         border: 2px solid var(--coral) !important;
     }
     
+    /* DARK OLIVE SIDEBAR - COMPLETE OVERRIDE */
+    section[data-testid="stSidebar"] {
+        background-color: var(--dark-olive) !important;
+    }
+    
+    section[data-testid="stSidebar"] > div {
+        background-color: var(--dark-olive) !important;
+    }
+    
+    /* Force ALL sidebar content to be white text */
+    section[data-testid="stSidebar"] * {
+        color: white !important;
+    }
+    
+    section[data-testid="stSidebar"] .stMarkdown {
+        color: white !important;
+    }
+    
+    section[data-testid="stSidebar"] .stMarkdown * {
+        color: white !important;
+    }
+    
+    section[data-testid="stSidebar"] .stMarkdown p {
+        color: white !important;
+    }
+    
+    section[data-testid="stSidebar"] .stMarkdown h1,
+    section[data-testid="stSidebar"] .stMarkdown h2,
+    section[data-testid="stSidebar"] .stMarkdown h3,
+    section[data-testid="stSidebar"] .stMarkdown h4 {
+        color: white !important;
+    }
+    
+    section[data-testid="stSidebar"] label {
+        color: white !important;
+        font-weight: 600 !important;
+    }
+    
+    /* SIDEBAR METRICS - WHITE BACKGROUND WITH CORAL BORDER */
+    section[data-testid="stSidebar"] div[data-testid="metric-container"] {
+        background-color: white !important;
+        border: 2px solid var(--coral) !important;
+        border-radius: 12px !important;
+        padding: 1.2rem !important;
+        margin-bottom: 1rem !important;
+    }
+    
+    section[data-testid="stSidebar"] div[data-testid="metric-container"] label {
+        color: var(--dark-olive) !important;
+        font-weight: 600 !important;
+    }
+    
+    section[data-testid="stSidebar"] div[data-testid="metric-container"] [data-testid="metric-value"] {
+        color: var(--dark-olive) !important;
+        font-weight: 700 !important;
+        font-size: 1.8rem !important;
+    }
+    
     /* ORANGE rating display */
     .rating-display {
         color: var(--orange);
@@ -162,14 +265,62 @@ st.markdown("""
     footer {visibility: hidden;}
     header {visibility: hidden;}
     
-    /* Main content text */
+    /* Main content text - DARK TEXT ON WHITE */
     .stMarkdown, .stText, p, div {
-        color: #212529 !important;
+        color: #212529;
     }
     
     label {
-        color: #495057 !important;
-        font-weight: 600 !important;
+        color: #495057;
+        font-weight: 600;
+    }
+    
+    /* Tabs styling */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 24px;
+    }
+    
+    .stTabs [data-baseweb="tab"] {
+        height: 50px;
+        background-color: white;
+        border-radius: 10px;
+        border: 2px solid var(--coral);
+        color: var(--dark-olive);
+        font-weight: 600;
+    }
+    
+    .stTabs [aria-selected="true"] {
+        background-color: var(--coral) !important;
+        color: white !important;
+    }
+    
+    /* Success/Info/Error messages */
+    .stSuccess {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+        border-radius: 10px;
+    }
+    
+    .stInfo {
+        background-color: #d1ecf1;
+        color: #0c5460;
+        border: 1px solid #bee5eb;
+        border-radius: 10px;
+    }
+    
+    .stError {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+        border-radius: 10px;
+    }
+    
+    .stWarning {
+        background-color: #fff3cd;
+        color: #856404;
+        border: 1px solid #ffeaa7;
+        border-radius: 10px;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -190,111 +341,73 @@ TFIDF_VECTORIZER_FILE = "tfidf_vectorizer.pkl"
 
 @st.cache_data
 def load_volunteer_data():
-    """Load and prepare volunteer data with enhanced features for similarity"""
+    """Load and MERGE both of YOUR CSV files for complete data - NO SAMPLE DATA"""
+    
+    # Load BOTH your CSV files - REQUIRED FILES
     try:
-        # Load your clustered data
-        df = pd.read_csv("Merged_Enriched_Events_CLUSTERED.csv")
-        
-        # Try to load historical data for location info
-        try:
-            historical_df = pd.read_csv("NYC_Service__Volunteer_Opportunities__Historical__20250626.csv")
-            df = df.merge(
-                historical_df[['opportunity_id', 'locality', 'region', 'Borough', 'Latitude', 'Longitude']], 
-                on='opportunity_id', 
-                how='left'
-            )
-        except FileNotFoundError:
-            st.warning("Historical location data not found - using enriched data only")
-        
-        # Clean and prepare data
-        df = df.fillna("")
-        
-        # Create location display
-        df['location_display'] = df.apply(lambda row: 
-            f"{row.get('locality', '')}, {row.get('region', '')}" if row.get('locality') 
-            else f"{row.get('Borough', '')}, NY" if row.get('Borough')
-            else "New York, NY", axis=1
-        )
-        
-        # Convert key columns to strings for similarity calculation
-        text_columns = ['title', 'description', 'org_title', 'Topical Theme', 'Mood/Intent', 'location_display']
-        for col in text_columns:
-            if col in df.columns:
-                df[col] = df[col].astype(str)
-        
-        # Create combined features for similarity calculation
-        df['combined_features'] = (
-            df.get('title', '') + ' ' + 
-            df.get('description', '') + ' ' + 
-            df.get('Topical Theme', '') + ' ' + 
-            df.get('Mood/Intent', '') + ' ' + 
-            df.get('org_title', '') + ' ' +
-            df.get('location_display', '')
-        )
-        
-        # Create event IDs
-        df['event_id'] = df.index.astype(str) + "_" + df['title'].str[:10]
-        df['short_description'] = df['description'].str[:150] + "..."
-        
-        return df
-        
+        enriched_df = pd.read_csv("Merged_Enriched_Events_CLUSTERED.csv")
+        st.success(f"✅ Loaded enriched data: {len(enriched_df)} events")
     except FileNotFoundError:
-        st.error("❌ Could not find 'Merged_Enriched_Events_CLUSTERED.csv'. Creating sample data...")
-        return create_sample_data()
-
-def create_sample_data():
-    """Create sample data with proper features for testing"""
-    sample_events = {
-        'title': [
-            'Community Garden Volunteer', 'Youth Tutoring Program', 'Animal Shelter Assistant',
-            'Food Bank Helper', 'Senior Companion', 'Beach Cleanup Volunteer',
-            'Literacy Program Helper', 'Homeless Shelter Support', 'Environmental Education',
-            'Hospital Volunteer', 'Urban Farm Assistant', 'Children Reading Program'
-        ],
-        'description': [
-            'Help maintain community gardens in Brooklyn. Plant vegetables, maintain paths.',
-            'Tutor elementary and middle school students in math, reading, and science.',
-            'Walk dogs, feed cats, clean kennels, and help with animal adoptions.',
-            'Sort, pack, and distribute food to families in need at food banks.',
-            'Provide companionship and assistance to elderly residents in nursing homes.',
-            'Join monthly beach cleanups at Coney Island and other NYC beaches.',
-            'Help adults learn to read and write through tutoring and literacy classes.',
-            'Serve meals, provide basic support, and assist with daily operations.',
-            'Teach kids about environmental conservation through hands-on activities.',
-            'Support patients and families at local hospitals through visitor programs.',
-            'Work on sustainable urban farming projects in local communities.',
-            'Read to children and help with early literacy development programs.'
-        ],
-        'org_title': [
-            'Brooklyn Community Gardens', 'NYC Education Alliance', 'ASPCA NYC',
-            'City Harvest', 'Senior Services Network', 'NYC Parks Department',
-            'Literacy Volunteers of NYC', 'Coalition for the Homeless', 'Central Park Conservancy',
-            'NewYork-Presbyterian Hospital', 'Brooklyn Urban Farm', 'Children\'s Library Initiative'
-        ],
-        'location_display': [
-            'Brooklyn, NY', 'Manhattan, NY', 'Queens, NY', 'Bronx, NY', 'Manhattan, NY', 'Brooklyn, NY',
-            'Queens, NY', 'Manhattan, NY', 'Manhattan, NY', 'Manhattan, NY', 'Brooklyn, NY', 'Bronx, NY'
-        ],
-        'Topical Theme': [
-            'Environment', 'Education', 'Animals', 'Hunger Relief', 'Elderly Care', 'Environment',
-            'Education', 'Homelessness', 'Environment', 'Healthcare', 'Environment', 'Education'
-        ],
-        'Mood/Intent': [
-            'Outdoor Activity', 'Skill Building', 'Animal Care', 'Community Service', 'Social Connection',
-            'Physical Activity', 'Teaching', 'Direct Service', 'Education', 'Support', 'Outdoor Activity', 'Teaching'
-        ]
-    }
+        st.error("❌ Could not find 'Merged_Enriched_Events_CLUSTERED.csv' - This file is required!")
+        st.stop()
     
-    df = pd.DataFrame(sample_events)
-    df['combined_features'] = (df['title'] + ' ' + df['description'] + ' ' + 
-                              df['Topical Theme'] + ' ' + df['Mood/Intent'])
-    df['event_id'] = df.index.astype(str) + "_" + df['title'].str[:10]
-    df['short_description'] = df['description'].str[:150] + "..."
+    try:
+        historical_df = pd.read_csv("NYC_Service__Volunteer_Opportunities__Historical__20250626.csv")
+        st.success(f"✅ Loaded historical data for location info")
+    except FileNotFoundError:
+        st.warning("⚠️ Historical location data not found - using enriched data only")
+        historical_df = None
     
-    st.info("📋 Using sample volunteer opportunities for demonstration")
-    return df
+    # Clean both datasets
+    enriched_df = enriched_df.fillna("")
+    
+    if historical_df is not None:
+        historical_df = historical_df.fillna("")
+        
+        # Merge them on opportunity_id to get BOTH the enriched data AND the location data
+        merged_df = enriched_df.merge(
+            historical_df[['opportunity_id', 'locality', 'region', 'Borough', 'Latitude', 'Longitude']], 
+            on='opportunity_id', 
+            how='left'
+        )
+        st.info(f"📍 Merged location data for {len(merged_df)} events")
+    else:
+        merged_df = enriched_df.copy()
+    
+    # Create proper location field using the REAL location data
+    merged_df['location_display'] = merged_df.apply(lambda row: 
+        f"{row.get('locality', '')}, {row.get('region', '')}" if row.get('locality') 
+        else f"{row.get('Borough', '')}, NY" if row.get('Borough')
+        else "New York, NY", axis=1
+    )
+    
+    # Convert key columns to strings for similarity calculation
+    text_columns = ['title', 'description', 'org_title', 'Topical Theme', 'Mood/Intent', 'location_display']
+    for col in text_columns:
+        if col in merged_df.columns:
+            merged_df[col] = merged_df[col].astype(str)
+    
+    # Create combined features for similarity calculation
+    merged_df['combined_features'] = (
+        merged_df.get('title', '') + ' ' + 
+        merged_df.get('description', '') + ' ' + 
+        merged_df.get('Topical Theme', '') + ' ' + 
+        merged_df.get('Mood/Intent', '') + ' ' + 
+        merged_df.get('org_title', '') + ' ' +
+        merged_df.get('location_display', '')
+    )
+    
+    # Create event IDs for ratings
+    merged_df['event_id'] = merged_df['opportunity_id'].astype(str) + "_" + merged_df['title'].str[:10]
+    
+    # Create short description
+    merged_df['short_description'] = merged_df['description'].str[:150] + "..."
+    
+    # Show data summary
+    st.success(f"🎯 Ready to recommend from {len(merged_df)} volunteer opportunities!")
+    
+    return merged_df
 
-@st.cache_data
 def create_similarity_matrix(df):
     """Create cosine similarity matrix for all events"""
     try:
@@ -361,7 +474,7 @@ def get_event_recommendations(event_index, similarity_matrix, df, num_recommenda
     
     return similar_events
 
-def get_recommendations_by_preferences(user_themes, user_moods, df, similarity_matrix, num_recommendations=8):
+def get_recommendations_by_preferences(user_themes, user_moods, df, tfidf_vectorizer, num_recommendations=8):
     """Get recommendations based on user's preferred themes and moods"""
     # Create a synthetic user profile
     user_profile = " ".join(user_themes + user_moods)
@@ -450,7 +563,8 @@ with tab1:
     
     # Quick search buttons
     st.markdown("**Quick searches:**")
-    quick_searches = ['Education', 'Environment', 'Animals', 'Hunger Relief', 'Elderly Care', 'Healthcare']
+    available_themes = [theme for theme in df['Topical Theme'].dropna().unique() if theme and str(theme) != 'nan']
+    quick_searches = available_themes[:6] if len(available_themes) >= 6 else available_themes
     cols = st.columns(len(quick_searches))
     
     for i, topic in enumerate(quick_searches):
@@ -503,11 +617,16 @@ with tab1:
                     
                     with col1:
                         # Tags
-                        if 'Topical Theme' in event and event['Topical Theme']:
+                        if 'Topical Theme' in event and event['Topical Theme'] and str(event['Topical Theme']) != 'nan':
                             st.markdown(f'<span class="tag">🎯 {event["Topical Theme"]}</span>', unsafe_allow_html=True)
                         
-                        if 'Mood/Intent' in event and event['Mood/Intent']:
+                        if 'Mood/Intent' in event and event['Mood/Intent'] and str(event['Mood/Intent']) != 'nan':
                             st.markdown(f'<span class="tag">💭 {event["Mood/Intent"]}</span>', unsafe_allow_html=True)
+                        
+                        # Additional tags from your data
+                        for tag_col in ['Effort Estimate', 'Weather Badge']:
+                            if tag_col in event and event[tag_col] and str(event[tag_col]) != 'nan':
+                                st.markdown(f'<span class="tag">{event[tag_col]}</span>', unsafe_allow_html=True)
                         
                         st.markdown("**📝 Description:**")
                         st.markdown(event.get('short_description', event.get('description', '')[:150] + "..."))
@@ -523,16 +642,19 @@ with tab1:
                         if st.button(f"I'm Interested!", key=f"interest_{idx}"):
                             st.success("🎉 Great! We'll use this to improve your recommendations!")
                             # Add to user preferences
-                            if event['Topical Theme'] not in st.session_state.user_preferences['themes']:
+                            if event['Topical Theme'] and event['Topical Theme'] not in st.session_state.user_preferences['themes']:
                                 st.session_state.user_preferences['themes'].append(event['Topical Theme'])
-                            if event['Mood/Intent'] not in st.session_state.user_preferences['moods']:
+                            if event['Mood/Intent'] and event['Mood/Intent'] not in st.session_state.user_preferences['moods']:
                                 st.session_state.user_preferences['moods'].append(event['Mood/Intent'])
                         
                         # COSINE SIMILARITY RECOMMENDATION BUTTON
                         if st.button(f"🎯 Find Similar Events", key=f"similar_{idx}"):
-                            event_index = results.index[idx]
+                            # Get the actual index in the original dataframe
+                            original_index = results.index[idx]
+                            # Convert to position in the dataframe for similarity matrix
+                            event_position = df.index.get_loc(original_index)
                             st.session_state.show_recommendations = True
-                            st.session_state.recommended_for_event = event_index
+                            st.session_state.recommended_for_event = event_position
                             st.rerun()
                         
                         # Rating system
@@ -568,9 +690,9 @@ with tab1:
                             col1, col2 = st.columns([3, 1])
                             
                             with col1:
-                                st.markdown(f'<div class="similarity-score">🎯 {similarity_score:.2f} similarity match</div>', unsafe_allow_html=True)
+                                st.markdown(f'<div class="similarity-score">🎯 {similarity_score:.3f} similarity match</div>', unsafe_allow_html=True)
                                 
-                                if 'Topical Theme' in event and event['Topical Theme']:
+                                if 'Topical Theme' in event and event['Topical Theme'] and str(event['Topical Theme']) != 'nan':
                                     st.markdown(f'<span class="tag">🎯 {event["Topical Theme"]}</span>', unsafe_allow_html=True)
                                 
                                 st.markdown(event.get('short_description', event.get('description', '')[:150] + "..."))
@@ -595,18 +717,18 @@ with tab2:
     
     with col1:
         st.markdown("**Select your interests:**")
-        available_themes = df['Topical Theme'].dropna().unique()
+        available_themes = [theme for theme in df['Topical Theme'].dropna().unique() if theme and str(theme) != 'nan']
         selected_themes = st.multiselect("Choose themes that interest you:", available_themes)
     
     with col2:
         st.markdown("**How do you like to help?**")
-        available_moods = df['Mood/Intent'].dropna().unique()
+        available_moods = [mood for mood in df['Mood/Intent'].dropna().unique() if mood and str(mood) != 'nan']
         selected_moods = st.multiselect("Choose your preferred volunteer style:", available_moods)
     
     if st.button("🚀 Get My Recommendations", type="primary"):
         if selected_themes or selected_moods:
             recommendations = get_recommendations_by_preferences(
-                selected_themes, selected_moods, df, similarity_matrix, num_recommendations=6
+                selected_themes, selected_moods, df, tfidf_vectorizer, num_recommendations=6
             )
             
             st.markdown("### 🌟 Your Personalized Recommendations")
@@ -625,19 +747,29 @@ with tab2:
                 col1, col2 = st.columns([3, 1])
                 
                 with col1:
-                    st.markdown(f'<div class="similarity-score">🎯 {similarity_score:.2f} match score</div>', unsafe_allow_html=True)
+                    st.markdown(f'<div class="similarity-score">🎯 {similarity_score:.3f} match score</div>', unsafe_allow_html=True)
                     
-                    if 'Topical Theme' in event and event['Topical Theme']:
+                    if 'Topical Theme' in event and event['Topical Theme'] and str(event['Topical Theme']) != 'nan':
                         st.markdown(f'<span class="tag">🎯 {event["Topical Theme"]}</span>', unsafe_allow_html=True)
                     
-                    if 'Mood/Intent' in event and event['Mood/Intent']:
+                    if 'Mood/Intent' in event and event['Mood/Intent'] and str(event['Mood/Intent']) != 'nan':
                         st.markdown(f'<span class="tag">💭 {event["Mood/Intent"]}</span>', unsafe_allow_html=True)
+                    
+                    # Additional tags from your data
+                    for tag_col in ['Effort Estimate', 'Weather Badge']:
+                        if tag_col in event and event[tag_col] and str(event[tag_col]) != 'nan':
+                            st.markdown(f'<span class="tag">{event[tag_col]}</span>', unsafe_allow_html=True)
                     
                     st.markdown(event.get('short_description', event.get('description', '')[:150] + "..."))
                 
                 with col2:
                     if st.button(f"I'm Interested!", key=f"pref_interest_{idx}"):
                         st.success("🎉 Great choice!")
+                        # Add to user preferences
+                        if event['Topical Theme'] and event['Topical Theme'] not in st.session_state.user_preferences['themes']:
+                            st.session_state.user_preferences['themes'].append(event['Topical Theme'])
+                        if event['Mood/Intent'] and event['Mood/Intent'] not in st.session_state.user_preferences['moods']:
+                            st.session_state.user_preferences['moods'].append(event['Mood/Intent'])
         else:
             st.warning("Please select at least one theme or mood to get recommendations!")
 
@@ -645,13 +777,59 @@ with tab3:
     st.subheader("⭐ Your Volunteer Interests")
     
     if st.session_state.user_preferences['themes'] or st.session_state.user_preferences['moods']:
-        st.markdown("**Your preferred themes:**")
-        for theme in st.session_state.user_preferences['themes']:
-            st.markdown(f"• {theme}")
+        col1, col2 = st.columns(2)
         
-        st.markdown("**Your preferred volunteer styles:**")
-        for mood in st.session_state.user_preferences['moods']:
-            st.markdown(f"• {mood}")
+        with col1:
+            st.markdown("**Your preferred themes:**")
+            for theme in st.session_state.user_preferences['themes']:
+                st.markdown(f"• {theme}")
+        
+        with col2:
+            st.markdown("**Your preferred volunteer styles:**")
+            for mood in st.session_state.user_preferences['moods']:
+                st.markdown(f"• {mood}")
+        
+        st.markdown("---")
+        
+        # Show recommendations based on saved preferences
+        if st.button("🎯 Get Recommendations Based On My Interests", type="primary"):
+            if st.session_state.user_preferences['themes'] or st.session_state.user_preferences['moods']:
+                recommendations = get_recommendations_by_preferences(
+                    st.session_state.user_preferences['themes'], 
+                    st.session_state.user_preferences['moods'], 
+                    df, tfidf_vectorizer, 
+                    num_recommendations=8
+                )
+                
+                st.markdown("### 🌟 Recommendations Based On Your Saved Interests")
+                
+                for idx, (_, event) in enumerate(recommendations.iterrows()):
+                    similarity_score = event['similarity_score']
+                    
+                    st.markdown(f"""
+                    <div class="recommendation-card">
+                        <div class="event-title">⭐ {event['title']}</div>
+                        <div class="event-org">🏢 {event['org_title']}</div>
+                        <div class="event-location">📍 {event['location_display']}</div>
+                    </div>
+                    """, unsafe_allow_html=True)
+                    
+                    col1, col2 = st.columns([3, 1])
+                    
+                    with col1:
+                        st.markdown(f'<div class="similarity-score">🎯 {similarity_score:.3f} match score</div>', unsafe_allow_html=True)
+                        
+                        if 'Topical Theme' in event and event['Topical Theme'] and str(event['Topical Theme']) != 'nan':
+                            st.markdown(f'<span class="tag">🎯 {event["Topical Theme"]}</span>', unsafe_allow_html=True)
+                        
+                        if 'Mood/Intent' in event and event['Mood/Intent'] and str(event['Mood/Intent']) != 'nan':
+                            st.markdown(f'<span class="tag">💭 {event["Mood/Intent"]}</span>', unsafe_allow_html=True)
+                        
+                        st.markdown(event.get('short_description', event.get('description', '')[:150] + "..."))
+                    
+                    with col2:
+                        if st.button(f"I'm Interested!", key=f"saved_interest_{idx}"):
+                            st.success("🎉 Great choice!")
         
         if st.button("🔄 Clear My Preferences"):
             st.session_state.user_preferences = {'themes': [], 'moods': []}
@@ -659,6 +837,21 @@ with tab3:
             st.rerun()
     else:
         st.info("Start exploring events and clicking 'I'm Interested!' to build your preference profile!")
+        
+        # Show some sample categories to get started
+        st.markdown("### 🚀 Get Started - Popular Categories:")
+        
+        if 'Topical Theme' in df.columns:
+            popular_themes = df['Topical Theme'].value_counts().head(6).index.tolist()
+            cols = st.columns(3)
+            
+            for i, theme in enumerate(popular_themes):
+                if theme and str(theme) != 'nan':
+                    with cols[i % 3]:
+                        if st.button(f"Explore {theme}", key=f"explore_{i}"):
+                            st.session_state.user_preferences['themes'].append(theme)
+                            st.success(f"Added {theme} to your interests!")
+                            st.rerun()
 
 # Sidebar with stats
 with st.sidebar:
@@ -667,9 +860,20 @@ with st.sidebar:
     total_events = len(df)
     st.metric("Total Opportunities", total_events)
     
+    # Show unique themes and moods
+    unique_themes = len([theme for theme in df['Topical Theme'].dropna().unique() if theme and str(theme) != 'nan'])
+    st.metric("Unique Themes", unique_themes)
+    
+    unique_moods = len([mood for mood in df['Mood/Intent'].dropna().unique() if mood and str(mood) != 'nan'])
+    st.metric("Volunteer Styles", unique_moods)
+    
     # Show similarity matrix info
     if similarity_matrix is not None:
-        st.metric("Similarity Calculations", f"{similarity_matrix.shape[0]}×{similarity_matrix.shape[1]}")
+        st.metric("AI Similarity Matrix", f"{similarity_matrix.shape[0]}×{similarity_matrix.shape[1]}")
+    
+    # Show user's current interests
+    total_interests = len(st.session_state.user_preferences['themes']) + len(st.session_state.user_preferences['moods'])
+    st.metric("Your Saved Interests", total_interests)
     
     st.markdown("---")
     st.header("🤖 How It Works")
@@ -679,9 +883,21 @@ with st.sidebar:
     1. **Cosine Similarity** - Mathematically compares events based on content
     2. **TF-IDF Vectorization** - Converts text to numerical vectors
     3. **Personalized Matching** - Learns your preferences over time
+    4. **Real Data** - Uses your actual NYC volunteer event data
     
     The more you interact, the better your recommendations become!
     """)
     
     st.markdown("---")
+    st.header("📈 Your Data")
+    
+    if 'Topical Theme' in df.columns:
+        top_themes = df['Topical Theme'].value_counts().head(5)
+        st.markdown("**Most Popular Themes:**")
+        for theme, count in top_themes.items():
+            if theme and str(theme) != 'nan':
+                st.markdown(f"• {theme}: {count} events")
+    
+    st.markdown("---")
     st.markdown("**🌱 Built with cosine similarity and machine learning**")
+    st.markdown("**📊 Powered by your real volunteer event data**")
