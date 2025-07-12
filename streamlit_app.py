@@ -141,8 +141,10 @@ st.markdown("""
         color: var(--dark-olive);
     }
     
-    /* Clean form controls */
+    /* Clean form controls - LIGHT backgrounds with readable text */
     .stSelectbox > div > div {
+        background-color: white !important;
+        color: #333 !important;
         border-radius: 8px;
         border: 1px solid #ccc;
     }
@@ -152,12 +154,38 @@ st.markdown("""
     }
     
     .stTextInput > div > div {
+        background-color: white !important;
+        color: #333 !important;
         border-radius: 8px;
         border: 1px solid #ccc;
     }
     
     .stTextInput > div > div:focus-within {
         border-color: var(--blue);
+    }
+    
+    .stTextInput input {
+        background-color: white !important;
+        color: #333 !important;
+    }
+    
+    .stSelectbox select {
+        background-color: white !important;
+        color: #333 !important;
+    }
+    
+    /* Quick search buttons - use dark olive like you suggested */
+    .stButton > button:not([kind="primary"]) {
+        background-color: var(--dark-olive) !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 8px !important;
+        padding: 0.6rem 1.2rem !important;
+        font-weight: 600 !important;
+    }
+    
+    .stButton > button:not([kind="primary"]):hover {
+        background-color: var(--warm-brown) !important;
     }
     
     /* Rating stars */
@@ -566,6 +594,10 @@ with st.sidebar:
 st.markdown("""
 <div class="footer">
 <h3>🌱 NYC Community Event Agent</h3>
+<p><em>Connecting volunteers with meaningful opportunities across New York City</em></p>
+<p>💚 <strong>Built with love for the community</strong> 💚</p>
+</div>
+""", unsafe_allow_html=True)
 <p><em>Connecting volunteers with meaningful opportunities across New York City</em></p>
 <p>💚 <strong>Built with love for the community</strong> 💚</p>
 </div>
