@@ -10,9 +10,250 @@ st.set_page_config(
     layout="wide"
 )
 
-# Title
-st.title("🌱 NYC Community Event Agent")
-st.markdown("**Choose how you'd like to help and find meaningful events near you.**")
+# Custom CSS with YOUR beautiful color palette!
+st.markdown("""
+<style>
+    /* Your gorgeous color palette */
+    :root {
+        --dark-olive: #4E5D46;
+        --blue: #4E91B3;
+        --warm-brown: #8D716D;
+        --coral: #D98B73;
+        --orange: #FDA767;
+    }
+    
+    /* Main app styling */
+    .stApp {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    }
+    
+    /* Header styling */
+    .main-header {
+        background: linear-gradient(135deg, var(--dark-olive) 0%, var(--blue) 100%);
+        color: white;
+        padding: 2rem;
+        border-radius: 15px;
+        text-align: center;
+        margin-bottom: 2rem;
+        box-shadow: 0 8px 25px rgba(78, 93, 70, 0.3);
+    }
+    
+    .main-header h1 {
+        margin: 0;
+        font-size: 2.5rem;
+        font-weight: 700;
+    }
+    
+    .main-header p {
+        margin: 0.5rem 0 0 0;
+        font-size: 1.2rem;
+        opacity: 0.9;
+    }
+    
+    /* Search container */
+    .search-container {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        margin-bottom: 2rem;
+        border-left: 5px solid var(--blue);
+    }
+    
+    /* Event cards */
+    .event-card {
+        background: white;
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        border-left: 4px solid var(--coral);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .event-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    
+    .event-title {
+        color: var(--dark-olive);
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+    
+    .event-org {
+        color: var(--blue);
+        font-weight: 500;
+        margin-bottom: 0.3rem;
+    }
+    
+    .event-location {
+        color: var(--warm-brown);
+        font-weight: 500;
+        margin-bottom: 0.8rem;
+    }
+    
+    /* Tags styling */
+    .event-tags {
+        margin: 0.8rem 0;
+    }
+    
+    .tag {
+        background: linear-gradient(45deg, var(--orange), var(--coral));
+        color: white;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        margin-right: 0.5rem;
+        margin-bottom: 0.3rem;
+        display: inline-block;
+        box-shadow: 0 2px 8px rgba(253, 167, 103, 0.3);
+    }
+    
+    /* Buttons */
+    .stButton > button {
+        background: linear-gradient(45deg, var(--blue), var(--coral)) !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 10px !important;
+        padding: 0.6rem 1.5rem !important;
+        font-weight: 600 !important;
+        transition: all 0.3s ease !important;
+        box-shadow: 0 4px 15px rgba(78, 145, 179, 0.3) !important;
+    }
+    
+    .stButton > button:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 6px 20px rgba(78, 145, 179, 0.4) !important;
+    }
+    
+    /* Primary button (Explore) */
+    div[data-testid="stButton"] button[kind="primary"] {
+        background: linear-gradient(45deg, var(--orange), var(--coral)) !important;
+        box-shadow: 0 4px 15px rgba(253, 167, 103, 0.4) !important;
+    }
+    
+    /* Sidebar styling */
+    .css-1d391kg {
+        background: linear-gradient(180deg, var(--dark-olive) 0%, var(--warm-brown) 100%);
+    }
+    
+    .sidebar .sidebar-content {
+        background: transparent;
+        color: white;
+    }
+    
+    /* Metrics styling */
+    div[data-testid="metric-container"] {
+        background: white;
+        border-radius: 10px;
+        padding: 1rem;
+        border-left: 4px solid var(--blue);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    div[data-testid="metric-container"] > div {
+        color: var(--dark-olive);
+    }
+    
+    /* Form controls */
+    .stSelectbox > div > div {
+        border-radius: 10px;
+        border: 2px solid #e0e0e0;
+        transition: border-color 0.3s ease;
+    }
+    
+    .stSelectbox > div > div:focus-within {
+        border-color: var(--blue);
+        box-shadow: 0 0 0 2px rgba(78, 145, 179, 0.2);
+    }
+    
+    .stTextInput > div > div {
+        border-radius: 10px;
+        border: 2px solid #e0e0e0;
+        transition: border-color 0.3s ease;
+    }
+    
+    .stTextInput > div > div:focus-within {
+        border-color: var(--coral);
+        box-shadow: 0 0 0 2px rgba(217, 139, 115, 0.2);
+    }
+    
+    /* Rating stars */
+    .rating-display {
+        color: var(--orange);
+        font-size: 1.1rem;
+        font-weight: bold;
+    }
+    
+    /* Success messages */
+    .stSuccess {
+        background: linear-gradient(45deg, #d4edda, #c3e6cb);
+        border-left: 4px solid var(--blue);
+        border-radius: 10px;
+    }
+    
+    /* Info messages */
+    .stInfo {
+        background: linear-gradient(45deg, #d1ecf1, #bee5eb);
+        border-left: 4px solid var(--blue);
+        border-radius: 10px;
+    }
+    
+    /* Footer styling */
+    .footer {
+        background: linear-gradient(135deg, var(--dark-olive) 0%, var(--warm-brown) 100%);
+        color: white;
+        padding: 2rem;
+        border-radius: 15px;
+        text-align: center;
+        margin-top: 3rem;
+        box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+    }
+    
+    /* Hide Streamlit branding */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
+    
+    /* Quick search buttons */
+    .quick-search-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin: 1rem 0;
+    }
+    
+    .quick-search-btn {
+        background: linear-gradient(45deg, var(--warm-brown), var(--coral));
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        border: none;
+        font-size: 0.9rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(141, 113, 109, 0.3);
+    }
+    
+    .quick-search-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(141, 113, 109, 0.4);
+    }
+</style>
+""", unsafe_allow_html=True)
+
+# Beautiful header with your colors
+st.markdown("""
+<div class="main-header">
+    <h1>🌱 NYC Community Event Agent</h1>
+    <p>Choose how you'd like to help and find meaningful events near you</p>
+</div>
+""", unsafe_allow_html=True)
 
 # === Community Rating System ===
 FEEDBACK_CSV = "feedback_backup.csv"
@@ -89,7 +330,6 @@ def load_volunteer_data():
     # Create short description
     merged_df['short_description'] = merged_df['description'].str[:150] + "..."
     
-    st.success(f"✅ Merged and loaded {len(merged_df)} volunteer opportunities with REAL locations!")
     return merged_df
 
 def create_sample_data():
@@ -278,64 +518,68 @@ if search_button or search_query:
         if len(results) > 0:
             st.subheader(f"🎯 Found {len(results)} matching opportunities")
             
-            # Display each result
+            # Display each result with beautiful styling
             for idx, (_, event) in enumerate(results.head(15).iterrows()):
+                # Beautiful event card
+                st.markdown(f"""
+                <div class="event-card">
+                    <div class="event-title">🌟 {event['title']}</div>
+                    <div class="event-org">🏢 {event['org_title']}</div>
+                    <div class="event-location">📍 {event['location_display']}</div>
+                </div>
+                """, unsafe_allow_html=True)
+                
                 with st.container():
-                    # Create expandable card for each event
-                    with st.expander(f"🌟 {event['title']} - {event['org_title']}", expanded=(idx < 3)):
+                    col1, col2 = st.columns([2, 1])
+                    
+                    with col1:
+                        # Theme and type
+                        if 'Topical Theme' in event and event['Topical Theme']:
+                            st.markdown(f'<span class="tag">🎯 {event["Topical Theme"]}</span>', unsafe_allow_html=True)
                         
-                        col1, col2 = st.columns([2, 1])
+                        if 'Mood/Intent' in event and event['Mood/Intent']:
+                            st.markdown(f'<span class="tag">💭 {event["Mood/Intent"]}</span>', unsafe_allow_html=True)
                         
-                        with col1:
-                            st.markdown(f"**🏢 Organization:** {event['org_title']}")
-                            st.markdown(f"**📍 Location:** {event['location_display']}")
-                            
-                            if 'Topical Theme' in event and event['Topical Theme']:
-                                st.markdown(f"**🎯 Theme:** `{event['Topical Theme']}`")
-                            
-                            if 'Mood/Intent' in event and event['Mood/Intent']:
-                                st.markdown(f"**💭 Type:** `{event['Mood/Intent']}`")
-                            
-                            # Your original tags display
-                            tags = []
-                            for tag_col in ['Topical Theme', 'Effort Estimate', 'Weather Badge']:
-                                if tag_col in event and event[tag_col] and str(event[tag_col]) != 'nan':
-                                    tags.append(f"`{event[tag_col]}`")
-                            if tags:
-                                st.markdown(f"🏷️ {' '.join(tags)}")
-                            
-                            st.markdown(f"**📝 Description:**")
-                            st.markdown(event.get('short_description', event.get('description', '')[:150] + "..."))
-                            
-                            # COMMUNITY RATING DISPLAY
-                            avg_rating = get_event_rating(event['event_id'])
-                            if avg_rating:
-                                st.markdown(f"⭐ **Community Rating:** {avg_rating}/5")
+                        # Additional tags
+                        for tag_col in ['Effort Estimate', 'Weather Badge']:
+                            if tag_col in event and event[tag_col] and str(event[tag_col]) != 'nan':
+                                st.markdown(f'<span class="tag">{event[tag_col]}</span>', unsafe_allow_html=True)
                         
-                        with col2:
-                            st.markdown("**🤝 Get Involved:**")
-                            
-                            if st.button(f"I'm Interested!", key=f"interest_{idx}"):
-                                st.success("🎉 Great! Contact the organization to get started volunteering!")
-                            
-                            # YOUR ORIGINAL RATING SYSTEM
-                            st.markdown("**Rate this event:**")
-                            rating = st.slider(
-                                "Rating:",
-                                1, 5, 3,
-                                key=f"rating_{idx}"
-                            )
-                            
-                            comment = st.text_input(
-                                "Leave feedback:",
-                                key=f"comment_{idx}",
-                                placeholder="Optional comment..."
-                            )
-                            
-                            if st.button(f"Submit Feedback", key=f"submit_rating_{idx}"):
-                                store_feedback(event['event_id'], rating, comment)
-                                st.success("✅ Thanks for the feedback!")
-                                st.rerun()
+                        st.markdown("**📝 Description:**")
+                        st.markdown(event.get('short_description', event.get('description', '')[:150] + "..."))
+                        
+                        # COMMUNITY RATING DISPLAY
+                        avg_rating = get_event_rating(event['event_id'])
+                        if avg_rating:
+                            stars = "⭐" * int(avg_rating)
+                            st.markdown(f'<div class="rating-display">{stars} Community Rating: {avg_rating}/5</div>', unsafe_allow_html=True)
+                    
+                    with col2:
+                        st.markdown("**🤝 Get Involved:**")
+                        
+                        if st.button(f"I'm Interested!", key=f"interest_{idx}"):
+                            st.success("🎉 Great! Contact the organization to get started volunteering!")
+                        
+                        # YOUR ORIGINAL RATING SYSTEM
+                        st.markdown("**Rate this event:**")
+                        rating = st.slider(
+                            "Rating:",
+                            1, 5, 3,
+                            key=f"rating_{idx}"
+                        )
+                        
+                        comment = st.text_input(
+                            "Leave feedback:",
+                            key=f"comment_{idx}",
+                            placeholder="Optional comment..."
+                        )
+                        
+                        if st.button(f"Submit Feedback", key=f"submit_rating_{idx}"):
+                            store_feedback(event['event_id'], rating, comment)
+                            st.success("✅ Thanks for the feedback!")
+                            st.rerun()
+                
+                st.markdown("<br>", unsafe_allow_html=True)
         else:
             st.info("🔍 No exact matches found. Try different keywords like 'kids', 'environment', 'food', or 'animals'")
 else:
@@ -381,10 +625,9 @@ with st.sidebar:
     Search by cause, location, or organization to discover ways to make a difference in your community!
     """)
 
-# Footer
-st.markdown("---")
+# Beautiful footer with your colors
 st.markdown("""
-<div style='text-align: center; padding: 20px; background-color: #f0f2f6; border-radius: 10px;'>
+<div class="footer">
     <h3>🌱 NYC Community Event Agent</h3>
     <p><em>Connecting volunteers with meaningful opportunities across New York City</em></p>
     <p>💚 <strong>Built with love for the community</strong> 💚</p>
