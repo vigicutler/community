@@ -130,6 +130,20 @@ st.markdown("""
         color: #212529 !important;
     }
     
+    /* Force dropdown text to be dark and readable */
+    .stSelectbox div[role="combobox"] {
+        background-color: white !important;
+        color: #212529 !important;
+    }
+    
+    .stSelectbox div[role="combobox"] > div {
+        color: #212529 !important;
+    }
+    
+    .stSelectbox div[role="combobox"] span {
+        color: #212529 !important;
+    }
+    
     /* Dropdown menu items */
     div[data-baseweb="select"] > div {
         background-color: white !important;
@@ -150,6 +164,36 @@ st.markdown("""
     }
     
     ul[data-baseweb="menu"] li:hover {
+        background-color: #f8f9fa !important;
+        color: #212529 !important;
+    }
+    
+    /* Force all multiselect text to be dark */
+    .stMultiSelect > div > div > div {
+        background-color: white !important;
+        color: #212529 !important;
+    }
+    
+    .stMultiSelect div[role="combobox"] {
+        background-color: white !important;
+        color: #212529 !important;
+    }
+    
+    .stMultiSelect div[role="combobox"] * {
+        color: #212529 !important;
+    }
+    
+    /* Multiselect dropdown items */
+    .stMultiSelect ul[data-baseweb="menu"] {
+        background-color: white !important;
+    }
+    
+    .stMultiSelect ul[data-baseweb="menu"] li {
+        background-color: white !important;
+        color: #212529 !important;
+    }
+    
+    .stMultiSelect ul[data-baseweb="menu"] li:hover {
         background-color: #f8f9fa !important;
         color: #212529 !important;
     }
@@ -346,16 +390,16 @@ def load_volunteer_data():
     # Load BOTH your CSV files - REQUIRED FILES
     try:
         enriched_df = pd.read_csv("Merged_Enriched_Events_CLUSTERED.csv")
-        st.success(f"✅ Loaded enriched data: {len(enriched_df)} events")
+        # st.success(f"✅ Loaded enriched data: {len(enriched_df)} events")  # Commented out
     except FileNotFoundError:
         st.error("❌ Could not find 'Merged_Enriched_Events_CLUSTERED.csv' - This file is required!")
         st.stop()
     
     try:
         historical_df = pd.read_csv("NYC_Service__Volunteer_Opportunities__Historical__20250626.csv")
-        st.success(f"✅ Loaded historical data for location info")
+        # st.success(f"✅ Loaded historical data for location info")  # Commented out
     except FileNotFoundError:
-        st.warning("⚠️ Historical location data not found - using enriched data only")
+        # st.warning("⚠️ Historical location data not found - using enriched data only")  # Commented out
         historical_df = None
     
     # Clean both datasets
@@ -370,7 +414,7 @@ def load_volunteer_data():
             on='opportunity_id', 
             how='left'
         )
-        st.info(f"📍 Merged location data for {len(merged_df)} events")
+        # st.info(f"📍 Merged location data for {len(merged_df)} events")  # Commented out
     else:
         merged_df = enriched_df.copy()
     
@@ -404,7 +448,7 @@ def load_volunteer_data():
     merged_df['short_description'] = merged_df['description'].str[:150] + "..."
     
     # Show data summary
-    st.success(f"🎯 Ready to recommend from {len(merged_df)} volunteer opportunities!")
+    # st.success(f"🎯 Ready to recommend from {len(merged_df)} volunteer opportunities!")  # Commented out
     
     return merged_df
 
@@ -417,7 +461,7 @@ def create_similarity_matrix(df):
                 similarity_matrix = pickle.load(f)
             with open(TFIDF_VECTORIZER_FILE, 'rb') as f:
                 tfidf_vectorizer = pickle.load(f)
-            st.success("✅ Loaded cached similarity matrix")
+            # st.success("✅ Loaded cached similarity matrix")  # Commented out
             return similarity_matrix, tfidf_vectorizer
     except Exception as e:
         st.warning(f"Could not load cached similarity matrix: {e}")
@@ -444,7 +488,7 @@ def create_similarity_matrix(df):
                 pickle.dump(similarity_matrix, f)
             with open(TFIDF_VECTORIZER_FILE, 'wb') as f:
                 pickle.dump(tfidf_vectorizer, f)
-            st.success("✅ Similarity matrix computed and cached!")
+            # st.success("✅ Similarity matrix computed and cached!")  # Commented out
         except Exception as e:
             st.warning(f"Could not cache similarity matrix: {e}")
     
