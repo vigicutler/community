@@ -101,54 +101,76 @@ st.markdown("""
         font-weight: 500 !important;
     }
     
-    /* MAIN SEARCH AREA DROPDOWNS - WHITE BACKGROUND, DARK TEXT */
-    .stSelectbox > div > div {
+    /* NUCLEAR OPTION FOR MAIN AREA DROPDOWNS - OVERRIDE EVERYTHING! */
+    .stSelectbox > div > div,
+    .stSelectbox > div > div > div,
+    .stSelectbox > div > div > div > div,
+    .stSelectbox > div > div > div > div > div,
+    .stSelectbox select,
+    .stSelectbox option {
         background-color: white !important;
-        color: #212529 !important;
+        background: white !important;
+        color: #000000 !important;
         border: 2px solid var(--warm-brown) !important;
         border-radius: 10px !important;
     }
     
-    .stSelectbox select {
+    /* TARGET EVERY POSSIBLE DROPDOWN ELEMENT */
+    div[data-baseweb="select"],
+    div[data-baseweb="select"] > div,
+    div[data-baseweb="select"] div,
+    div[data-baseweb="select"] span,
+    div[data-baseweb="popover"],
+    div[data-baseweb="popover"] div,
+    div[data-baseweb="popover"] span,
+    ul[data-baseweb="menu"],
+    ul[data-baseweb="menu"] li,
+    ul[data-baseweb="menu"] li div,
+    ul[data-baseweb="menu"] li span {
         background-color: white !important;
-        color: #212529 !important;
-        font-weight: 500 !important;
+        background: white !important;
+        color: #000000 !important;
     }
     
-    /* DROPDOWN MENU OPTIONS - WHITE BACKGROUND, DARK TEXT */
-    .stSelectbox div[data-baseweb="select"] > div {
+    /* FORCE ALL SELECTBOX COMPONENTS */
+    .stSelectbox *,
+    .stSelectbox div,
+    .stSelectbox span,
+    .stSelectbox li,
+    .stSelectbox ul {
         background-color: white !important;
-        color: #212529 !important;
+        background: white !important;
+        color: #000000 !important;
     }
     
-    .stSelectbox div[data-baseweb="select"] div {
+    /* OVERRIDE ANY THEME STYLES */
+    [data-testid="stSelectbox"] *,
+    [data-testid="stSelectbox"] div,
+    [data-testid="stSelectbox"] span {
         background-color: white !important;
-        color: #212529 !important;
+        background: white !important;
+        color: #000000 !important;
     }
     
-    /* DROPDOWN POPUP MENU */
-    div[data-baseweb="popover"] {
+    /* MAIN AREA ONLY - NOT SIDEBAR */
+    .main .stSelectbox *,
+    .block-container .stSelectbox *,
+    .element-container .stSelectbox * {
         background-color: white !important;
+        background: white !important;
+        color: #000000 !important;
     }
     
-    div[data-baseweb="popover"] div {
+    /* STREAMLIT SELECT WIDGET OVERRIDE */
+    .stSelectbox div[role="combobox"],
+    .stSelectbox div[role="combobox"] *,
+    .stSelectbox div[role="listbox"],
+    .stSelectbox div[role="listbox"] *,
+    .stSelectbox div[role="option"],
+    .stSelectbox div[role="option"] * {
         background-color: white !important;
-        color: #212529 !important;
-    }
-    
-    ul[data-baseweb="menu"] {
-        background-color: white !important;
-    }
-    
-    ul[data-baseweb="menu"] li {
-        background-color: white !important;
-        color: #212529 !important;
-    }
-    
-    /* FORCE ALL DROPDOWN ELEMENTS TO BE READABLE */
-    .stSelectbox * {
-        background-color: white !important;
-        color: #212529 !important;
+        background: white !important;
+        color: #000000 !important;
     }
     
     /* SOLID ORANGE buttons - NO GRADIENT */
