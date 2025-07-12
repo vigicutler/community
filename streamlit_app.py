@@ -1,5 +1,3 @@
-# FIXED VERSION - NYC VOLUNTEER APP - NO MORE EMOJI ERRORS!
-# This version removes emoji from HTML to fix syntax error
 import streamlit as st
 import pandas as pd
 import os
@@ -7,7 +5,7 @@ from datetime import datetime
 
 # Page config
 st.set_page_config(
-    page_title="NYC Volunteer Events",
+    page_title="🌱 NYC Volunteer Events",
     page_icon="🌱",
     layout="wide"
 )
@@ -396,8 +394,6 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
-</style>
-""", unsafe_allow_html=True)
 
 # Beautiful header with your colors
 st.markdown("""
@@ -484,87 +480,6 @@ def load_volunteer_data():
     
     return merged_df
 
-def create_sample_data():
-    """Create sample volunteer data"""
-    sample_events = {
-        'title': [
-            'Community Garden Volunteer',
-            'Youth Tutoring Program',
-            'Animal Shelter Assistant',
-            'Food Bank Helper',
-            'Senior Companion',
-            'Beach Cleanup Volunteer',
-            'Literacy Program Helper',
-            'Homeless Shelter Support',
-            'Environmental Education',
-            'Hospital Volunteer'
-        ],
-        'description': [
-            'Help maintain community gardens in Brooklyn. Plant vegetables, maintain paths, and support local food production.',
-            'Tutor elementary and middle school students in math, reading, and science after school programs.',
-            'Walk dogs, feed cats, clean kennels, and help with animal adoptions at local ASPCA shelter.',
-            'Sort, pack, and distribute food to families in need at City Harvest food bank locations.',
-            'Provide companionship and assistance to elderly residents in nursing homes and senior centers.',
-            'Join monthly beach cleanups at Coney Island and other NYC beaches. Help protect marine life.',
-            'Help adults learn to read and write through one-on-one tutoring and group literacy classes.',
-            'Serve meals, provide basic support, and assist with daily operations at homeless shelters.',
-            'Teach kids about environmental conservation through hands-on activities and nature walks.',
-            'Support patients and families at local hospitals through visitor programs and administrative help.'
-        ],
-        'org_title': [
-            'Brooklyn Community Gardens',
-            'NYC Education Alliance',
-            'ASPCA NYC',
-            'City Harvest',
-            'Senior Services Network',
-            'NYC Parks Department',
-            'Literacy Volunteers of NYC',
-            'Coalition for the Homeless',
-            'Central Park Conservancy',
-            'NewYork-Presbyterian Hospital'
-        ],
-        'primary_loc': [
-            'Brooklyn, NY',
-            'Manhattan, NY',
-            'Queens, NY',
-            'Bronx, NY',
-            'Manhattan, NY',
-            'Brooklyn, NY',
-            'Queens, NY',
-            'Manhattan, NY',
-            'Manhattan, NY',
-            'Manhattan, NY'
-        ],
-        'Topical Theme': [
-            'Environment',
-            'Education',
-            'Animals',
-            'Hunger Relief',
-            'Elderly Care',
-            'Environment',
-            'Education',
-            'Homelessness',
-            'Environment',
-            'Healthcare'
-        ],
-        'Mood/Intent': [
-            'Outdoor Activity',
-            'Skill Building',
-            'Animal Care',
-            'Community Service',
-            'Social Connection',
-            'Physical Activity',
-            'Teaching',
-            'Direct Service',
-            'Education',
-            'Support'
-    }
-    
-    df = pd.DataFrame(sample_events)
-    df['short_description'] = df['description'].str[:150] + "..."
-    st.info("📋 Using sample volunteer opportunities for demonstration")
-    return df
-
 # Load YOUR REAL DATA
 with st.spinner("🔄 Loading your volunteer opportunities..."):
     df = load_volunteer_data()
@@ -591,15 +506,15 @@ with col1:
     if 'Mood/Intent' in df.columns:
         unique_moods = [m for m in df['Mood/Intent'].unique() if m and str(m) != 'nan' and str(m) != '']
         mood_options.extend(sorted(unique_moods))
-    mood_input = st.selectbox("Optional — Set an Intention", mood_options)
+    mood_input = st.selectbox("🌫️ Optional — Set an Intention", mood_options)
 
 with col2:
     # ZIP Code filter (your core feature!)
-    zipcode_input = st.text_input("Optional — ZIP Code", placeholder="e.g. 10027")
+    zipcode_input = st.text_input("📍 Optional — ZIP Code", placeholder="e.g. 10027")
 
 with col3:
     # Weather filter (your core feature!)
-    weather_filter = st.selectbox("Filter by Weather Option", ["", "Indoors", "Outdoors", "Flexible"])
+    weather_filter = st.selectbox("☀️ Filter by Weather Option", ["", "Indoors", "Outdoors", "Flexible"])
 
 # Quick search buttons
 st.markdown("**Quick searches:**")
@@ -740,7 +655,7 @@ else:
 # Sidebar with stats, login, and info
 with st.sidebar:
     # Fun fake login section
-    st.markdown("### Welcome!")
+    st.markdown("### 👋 Welcome!")
     
     if 'logged_in' not in st.session_state:
         st.session_state.logged_in = False
@@ -803,7 +718,7 @@ with st.sidebar:
     """)
     
     st.markdown("---")
-    st.header("About")
+    st.header("🎯 About")
     st.markdown("""
     This app helps you find meaningful volunteer opportunities across New York City. 
     
