@@ -1,3 +1,5 @@
+# FIXED VERSION - NYC VOLUNTEER APP - NO MORE EMOJI ERRORS!
+# This version removes emoji from HTML to fix syntax error
 import streamlit as st
 import pandas as pd
 import os
@@ -5,7 +7,7 @@ from datetime import datetime
 
 # Page config
 st.set_page_config(
-    page_title="🌱 NYC Volunteer Events",
+    page_title="NYC Volunteer Events",
     page_icon="🌱",
     layout="wide"
 )
