@@ -13,7 +13,7 @@ st.set_page_config(
 # Custom CSS - Clean professional design like vigiwater.org
 st.markdown("""
 <style>
-    /* VIBRANT COLOR PALETTE - USE ALL COLORS! */
+    /* SOLID COLORS ONLY - NO GRADIENTS! */
     :root {
         --dark-olive: #4E5D46;
         --blue: #4E91B3;
@@ -22,48 +22,42 @@ st.markdown("""
         --orange: #FDA767;
     }
     
-    /* Bright, welcoming main app */
+    /* Clean main app */
     .stApp {
-        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        background-color: #ffffff;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
     
-    /* BLUE to DARK OLIVE header gradient */
+    /* SOLID BLUE header - NO GRADIENT */
     .main-header {
-        background: linear-gradient(135deg, var(--blue) 0%, var(--dark-olive) 100%);
+        background-color: var(--blue);
         color: white;
         padding: 2.5rem;
         border-radius: 15px;
         text-align: center;
         margin-bottom: 2rem;
-        box-shadow: 0 8px 25px rgba(78, 145, 179, 0.3);
+        box-shadow: 0 4px 15px rgba(78, 145, 179, 0.2);
     }
     
-    /* WARM BROWN border search container */
+    /* SOLID WHITE search container with warm brown border */
     .search-container {
-        background: white;
+        background-color: white;
         padding: 2rem;
         border-radius: 15px;
         border: 3px solid var(--warm-brown);
         margin-bottom: 2rem;
-        box-shadow: 0 4px 15px rgba(141, 113, 109, 0.1);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     }
     
-    /* CORAL border event cards */
+    /* SOLID WHITE event cards with coral border */
     .event-card {
-        background: white;
+        background-color: white;
         border-radius: 15px;
         padding: 1.5rem;
         margin-bottom: 1.5rem;
         border: 1px solid #e9ecef;
         border-left: 5px solid var(--coral);
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        transition: transform 0.2s ease;
-    }
-    
-    .event-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     }
     
     .event-title {
@@ -85,21 +79,20 @@ st.markdown("""
         margin-bottom: 0.8rem;
     }
     
-    /* ORANGE to CORAL gradient tags */
+    /* SOLID CORAL tags - NO GRADIENT */
     .tag {
-        background: linear-gradient(45deg, var(--orange), var(--coral));
+        background-color: var(--coral);
         color: white;
         padding: 0.3rem 0.8rem;
-        border-radius: 20px;
+        border-radius: 15px;
         font-size: 0.8rem;
         font-weight: 600;
         margin-right: 0.5rem;
         margin-bottom: 0.3rem;
         display: inline-block;
-        box-shadow: 0 2px 8px rgba(253, 167, 103, 0.3);
     }
     
-    /* WARM BROWN border inputs */
+    /* WHITE inputs with warm brown border */
     .stTextInput > div > div > input {
         background-color: white !important;
         color: #212529 !important;
@@ -121,7 +114,7 @@ st.markdown("""
         font-weight: 500 !important;
     }
     
-    /* ORANGE buttons */
+    /* SOLID ORANGE buttons - NO GRADIENT */
     .stButton > button {
         background-color: var(--orange) !important;
         color: white !important;
@@ -129,47 +122,58 @@ st.markdown("""
         border-radius: 10px !important;
         padding: 0.7rem 1.5rem !important;
         font-weight: 600 !important;
-        transition: all 0.3s ease !important;
-        box-shadow: 0 4px 15px rgba(253, 167, 103, 0.3) !important;
     }
     
     .stButton > button:hover {
         background-color: var(--coral) !important;
-        transform: translateY(-2px) !important;
-        box-shadow: 0 6px 20px rgba(253, 167, 103, 0.4) !important;
     }
     
-    /* BLUE primary search button */
+    /* SOLID BLUE primary button */
     div[data-testid="stButton"] button[kind="primary"] {
         background-color: var(--blue) !important;
-        box-shadow: 0 4px 15px rgba(78, 145, 179, 0.3) !important;
     }
     
     div[data-testid="stButton"] button[kind="primary"]:hover {
         background-color: var(--dark-olive) !important;
     }
     
-    /* DARK OLIVE SIDEBAR with WHITE TEXT - READABLE! */
+    /* DARK OLIVE SIDEBAR with WHITE TEXT */
     .css-1d391kg {
         background-color: var(--dark-olive) !important;
     }
     
-    .css-1d391kg .stMarkdown, 
-    .css-1d391kg .stText, 
-    .css-1d391kg p, 
-    .css-1d391kg div,
-    .css-1d391kg h1,
-    .css-1d391kg h2,
-    .css-1d391kg h3,
-    .css-1d391kg h4,
+    /* FORCE WHITE TEXT ON SIDEBAR */
+    .css-1d391kg * {
+        color: white !important;
+    }
+    
+    .css-1d391kg .stMarkdown * {
+        color: white !important;
+    }
+    
+    .css-1d391kg .stText * {
+        color: white !important;
+    }
+    
+    .css-1d391kg p {
+        color: white !important;
+    }
+    
+    .css-1d391kg div {
+        color: white !important;
+    }
+    
+    .css-1d391kg h1, .css-1d391kg h2, .css-1d391kg h3, .css-1d391kg h4 {
+        color: white !important;
+    }
+    
     .css-1d391kg label {
         color: white !important;
-        font-weight: 500 !important;
+        font-weight: 600 !important;
     }
     
     .css-1d391kg .stMetric label {
         color: white !important;
-        font-weight: 600 !important;
     }
     
     .css-1d391kg .stMetric [data-testid="metric-value"] {
@@ -178,26 +182,30 @@ st.markdown("""
         font-weight: 700 !important;
     }
     
-    /* WHITE sidebar inputs - readable! */
+    /* WHITE sidebar inputs */
     .css-1d391kg .stTextInput > div > div > input {
         background-color: white !important;
         color: #212529 !important;
         border: 2px solid var(--coral) !important;
     }
     
-    /* CORAL metrics with white background */
+    /* WHITE metrics with coral border */
     div[data-testid="metric-container"] {
-        background: white !important;
+        background-color: white !important;
         border-radius: 12px;
         padding: 1.2rem;
-        border: 3px solid var(--coral) !important;
-        box-shadow: 0 4px 15px rgba(217, 139, 115, 0.2);
+        border: 2px solid var(--coral) !important;
         margin-bottom: 1rem !important;
     }
     
-    div[data-testid="metric-container"] > div {
+    div[data-testid="metric-container"] label {
         color: var(--dark-olive) !important;
         font-weight: 600 !important;
+    }
+    
+    div[data-testid="metric-container"] [data-testid="metric-value"] {
+        color: var(--dark-olive) !important;
+        font-weight: 700 !important;
     }
     
     /* ORANGE rating display */
@@ -205,7 +213,6 @@ st.markdown("""
         color: var(--orange);
         font-size: 1.2rem;
         font-weight: bold;
-        text-shadow: 0 2px 4px rgba(253, 167, 103, 0.3);
     }
     
     /* Hide Streamlit elements */
@@ -213,7 +220,7 @@ st.markdown("""
     footer {visibility: hidden;}
     header {visibility: hidden;}
     
-    /* Make main text readable */
+    /* Main content text */
     .stMarkdown, .stText, p, div {
         color: #212529 !important;
     }
