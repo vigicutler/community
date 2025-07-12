@@ -394,6 +394,8 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
+</style>
+""", unsafe_allow_html=True)
 
 # Beautiful header with your colors
 st.markdown("""
@@ -554,10 +556,10 @@ def create_sample_data():
             'Direct Service',
             'Education',
             'Support'
-        ]
     }
     
     df = pd.DataFrame(sample_events)
+    df['short_description'] = df['description'].str[:150] + "..."
     st.info("📋 Using sample volunteer opportunities for demonstration")
     return df
 
@@ -810,10 +812,6 @@ with st.sidebar:
 st.markdown("""
 <div class="footer">
 <h3>🌱 NYC Community Event Agent</h3>
-<p><em>Connecting volunteers with meaningful opportunities across New York City</em></p>
-<p><strong>Built with love for the community</strong></p>
-</div>
-""", unsafe_allow_html=True)
 <p><em>Connecting volunteers with meaningful opportunities across New York City</em></p>
 <p><strong>Built with love for the community</strong></p>
 </div>
