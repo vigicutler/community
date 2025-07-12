@@ -137,12 +137,63 @@ st.markdown("""
         background-color: var(--dark-olive) !important;
     }
     
-    /* DARK OLIVE SIDEBAR with WHITE TEXT */
+    /* DARK OLIVE SIDEBAR with WHITE TEXT - FORCE EVERYTHING WHITE! */
     .css-1d391kg {
         background-color: var(--dark-olive) !important;
     }
     
-    /* FORCE WHITE TEXT ON SIDEBAR */
+    /* NUCLEAR OPTION - FORCE ALL SIDEBAR TEXT TO BE WHITE */
+    section[data-testid="stSidebar"] * {
+        color: white !important;
+    }
+    
+    section[data-testid="stSidebar"] .stMarkdown {
+        color: white !important;
+    }
+    
+    section[data-testid="stSidebar"] .stMarkdown * {
+        color: white !important;
+    }
+    
+    section[data-testid="stSidebar"] .stText {
+        color: white !important;
+    }
+    
+    section[data-testid="stSidebar"] p {
+        color: white !important;
+    }
+    
+    section[data-testid="stSidebar"] div {
+        color: white !important;
+    }
+    
+    section[data-testid="stSidebar"] span {
+        color: white !important;
+    }
+    
+    section[data-testid="stSidebar"] h1, 
+    section[data-testid="stSidebar"] h2, 
+    section[data-testid="stSidebar"] h3, 
+    section[data-testid="stSidebar"] h4 {
+        color: white !important;
+    }
+    
+    section[data-testid="stSidebar"] label {
+        color: white !important;
+        font-weight: 600 !important;
+    }
+    
+    section[data-testid="stSidebar"] .stMetric label {
+        color: white !important;
+    }
+    
+    section[data-testid="stSidebar"] .stMetric [data-testid="metric-value"] {
+        color: white !important;
+        font-size: 2rem !important;
+        font-weight: 700 !important;
+    }
+    
+    /* Legacy sidebar selectors - keep these too */
     .css-1d391kg * {
         color: white !important;
     }
