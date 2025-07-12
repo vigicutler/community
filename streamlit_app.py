@@ -480,6 +480,87 @@ def load_volunteer_data():
     
     return merged_df
 
+def create_sample_data():
+    """Create sample volunteer data"""
+    sample_events = {
+        'title': [
+            'Community Garden Volunteer',
+            'Youth Tutoring Program',
+            'Animal Shelter Assistant',
+            'Food Bank Helper',
+            'Senior Companion',
+            'Beach Cleanup Volunteer',
+            'Literacy Program Helper',
+            'Homeless Shelter Support',
+            'Environmental Education',
+            'Hospital Volunteer'
+        ],
+        'description': [
+            'Help maintain community gardens in Brooklyn. Plant vegetables, maintain paths, and support local food production.',
+            'Tutor elementary and middle school students in math, reading, and science after school programs.',
+            'Walk dogs, feed cats, clean kennels, and help with animal adoptions at local ASPCA shelter.',
+            'Sort, pack, and distribute food to families in need at City Harvest food bank locations.',
+            'Provide companionship and assistance to elderly residents in nursing homes and senior centers.',
+            'Join monthly beach cleanups at Coney Island and other NYC beaches. Help protect marine life.',
+            'Help adults learn to read and write through one-on-one tutoring and group literacy classes.',
+            'Serve meals, provide basic support, and assist with daily operations at homeless shelters.',
+            'Teach kids about environmental conservation through hands-on activities and nature walks.',
+            'Support patients and families at local hospitals through visitor programs and administrative help.'
+        ],
+        'org_title': [
+            'Brooklyn Community Gardens',
+            'NYC Education Alliance',
+            'ASPCA NYC',
+            'City Harvest',
+            'Senior Services Network',
+            'NYC Parks Department',
+            'Literacy Volunteers of NYC',
+            'Coalition for the Homeless',
+            'Central Park Conservancy',
+            'NewYork-Presbyterian Hospital'
+        ],
+        'primary_loc': [
+            'Brooklyn, NY',
+            'Manhattan, NY',
+            'Queens, NY',
+            'Bronx, NY',
+            'Manhattan, NY',
+            'Brooklyn, NY',
+            'Queens, NY',
+            'Manhattan, NY',
+            'Manhattan, NY',
+            'Manhattan, NY'
+        ],
+        'Topical Theme': [
+            'Environment',
+            'Education',
+            'Animals',
+            'Hunger Relief',
+            'Elderly Care',
+            'Environment',
+            'Education',
+            'Homelessness',
+            'Environment',
+            'Healthcare'
+        ],
+        'Mood/Intent': [
+            'Outdoor Activity',
+            'Skill Building',
+            'Animal Care',
+            'Community Service',
+            'Social Connection',
+            'Physical Activity',
+            'Teaching',
+            'Direct Service',
+            'Education',
+            'Support'
+        ]
+    }
+    
+    df = pd.DataFrame(sample_events)
+    st.info("📋 Using sample volunteer opportunities for demonstration")
+    return df
+
 # Load YOUR REAL DATA
 with st.spinner("🔄 Loading your volunteer opportunities..."):
     df = load_volunteer_data()
