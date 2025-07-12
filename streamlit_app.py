@@ -13,7 +13,7 @@ st.set_page_config(
 # Custom CSS - Clean professional design like vigiwater.org
 st.markdown("""
 <style>
-    /* Clean, modern color palette */
+    /* FUN, VIBRANT COLORS! */
     :root {
         --dark-olive: #4E5D46;
         --blue: #4E91B3;
@@ -22,40 +22,48 @@ st.markdown("""
         --orange: #FDA767;
     }
     
-    /* Clean main app */
+    /* Bright, welcoming main app */
     .stApp {
-        background-color: #ffffff;
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
     
-    /* Clean header */
+    /* Fun header with gradient */
     .main-header {
-        background-color: var(--dark-olive);
+        background: linear-gradient(135deg, var(--coral) 0%, var(--orange) 100%);
         color: white;
-        padding: 2rem;
-        border-radius: 12px;
+        padding: 2.5rem;
+        border-radius: 15px;
         text-align: center;
         margin-bottom: 2rem;
+        box-shadow: 0 8px 25px rgba(217, 139, 115, 0.3);
     }
     
-    /* Search container */
+    /* Bright search container */
     .search-container {
-        background: #f8f9fa;
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
         padding: 2rem;
-        border-radius: 12px;
-        border: 1px solid #e9ecef;
+        border-radius: 15px;
+        border: 2px solid var(--coral);
         margin-bottom: 2rem;
+        box-shadow: 0 4px 15px rgba(217, 139, 115, 0.1);
     }
     
-    /* Event cards */
+    /* Vibrant event cards */
     .event-card {
         background: white;
-        border-radius: 12px;
+        border-radius: 15px;
         padding: 1.5rem;
         margin-bottom: 1.5rem;
         border: 1px solid #e9ecef;
-        border-left: 4px solid var(--blue);
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        border-left: 5px solid var(--blue);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        transition: transform 0.2s ease;
+    }
+    
+    .event-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.12);
     }
     
     .event-title {
@@ -77,72 +85,68 @@ st.markdown("""
         margin-bottom: 0.8rem;
     }
     
-    /* Tags */
+    /* Fun colorful tags */
     .tag {
-        background-color: var(--coral);
+        background: linear-gradient(45deg, var(--orange), var(--coral));
         color: white;
-        padding: 0.25rem 0.75rem;
-        border-radius: 12px;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
         font-size: 0.8rem;
-        font-weight: 500;
+        font-weight: 600;
         margin-right: 0.5rem;
         margin-bottom: 0.3rem;
         display: inline-block;
+        box-shadow: 0 2px 8px rgba(253, 167, 103, 0.3);
     }
     
-    /* Fix ALL text inputs and selects to be readable */
+    /* Readable form inputs */
     .stTextInput > div > div > input {
         background-color: white !important;
         color: #212529 !important;
-        border: 1px solid #ced4da !important;
-        border-radius: 8px !important;
+        border: 2px solid var(--coral) !important;
+        border-radius: 10px !important;
+        font-weight: 500 !important;
     }
     
     .stSelectbox > div > div {
         background-color: white !important;
         color: #212529 !important;
-        border: 1px solid #ced4da !important;
-        border-radius: 8px !important;
+        border: 2px solid var(--coral) !important;
+        border-radius: 10px !important;
     }
     
     .stSelectbox select {
         background-color: white !important;
         color: #212529 !important;
+        font-weight: 500 !important;
     }
     
-    /* Buttons */
+    /* Fun, colorful buttons */
     .stButton > button {
-        background-color: var(--orange) !important;
+        background: linear-gradient(45deg, var(--orange), var(--coral)) !important;
         color: white !important;
         border: none !important;
-        border-radius: 8px !important;
-        padding: 0.6rem 1.2rem !important;
+        border-radius: 10px !important;
+        padding: 0.7rem 1.5rem !important;
         font-weight: 600 !important;
-        transition: background-color 0.2s ease !important;
+        transition: all 0.3s ease !important;
+        box-shadow: 0 4px 15px rgba(253, 167, 103, 0.3) !important;
     }
     
     .stButton > button:hover {
-        background-color: var(--coral) !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 6px 20px rgba(253, 167, 103, 0.4) !important;
     }
     
-    /* Primary button */
+    /* Primary search button */
     div[data-testid="stButton"] button[kind="primary"] {
-        background-color: var(--blue) !important;
+        background: linear-gradient(45deg, var(--blue), var(--dark-olive)) !important;
+        box-shadow: 0 4px 15px rgba(78, 145, 179, 0.3) !important;
     }
     
-    div[data-testid="stButton"] button[kind="primary"]:hover {
-        background-color: var(--dark-olive) !important;
-    }
-    
-    /* Quick search buttons */
-    .stButton > button:not([kind="primary"]) {
-        background-color: var(--dark-olive) !important;
-        color: white !important;
-    }
-    
-    /* Sidebar - DARK BACKGROUND = LIGHT TEXT */
+    /* CORAL SIDEBAR - FUN AND BRIGHT! */
     .css-1d391kg {
-        background-color: var(--warm-brown) !important;
+        background: linear-gradient(180deg, var(--coral) 0%, var(--orange) 100%) !important;
     }
     
     .css-1d391kg .stMarkdown, 
@@ -154,30 +158,30 @@ st.markdown("""
     .css-1d391kg h3,
     .css-1d391kg h4 {
         color: white !important;
+        font-weight: 500 !important;
     }
     
-    .css-1d391kg .stMetric label {
-        color: white !important;
-    }
-    
-    .css-1d391kg .stMetric [data-testid="metric-value"] {
-        color: white !important;
-    }
-    
-    /* Metrics */
+    /* Bright metrics */
     div[data-testid="metric-container"] {
         background: white;
-        border-radius: 8px;
-        padding: 1rem;
-        border-left: 3px solid var(--orange);
-        border: 1px solid #e9ecef;
+        border-radius: 12px;
+        padding: 1.2rem;
+        border-left: 4px solid var(--orange);
+        border: 2px solid var(--coral);
+        box-shadow: 0 4px 15px rgba(217, 139, 115, 0.1);
     }
     
-    /* Rating display */
+    div[data-testid="metric-container"] > div {
+        color: var(--dark-olive);
+        font-weight: 600;
+    }
+    
+    /* Fun rating display */
     .rating-display {
         color: var(--orange);
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         font-weight: bold;
+        text-shadow: 0 2px 4px rgba(253, 167, 103, 0.3);
     }
     
     /* Hide Streamlit elements */
@@ -185,15 +189,14 @@ st.markdown("""
     footer {visibility: hidden;}
     header {visibility: hidden;}
     
-    /* Ensure all text is readable */
+    /* Make all text readable */
     .stMarkdown, .stText, p, div {
         color: #212529 !important;
     }
     
-    /* Fix label colors */
     label {
         color: #495057 !important;
-        font-weight: 500 !important;
+        font-weight: 600 !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -536,8 +539,41 @@ if search_button or search_query:
 else:
     st.info("Enter a topic like \"food\", \"kids\", \"Inwood\", etc. to explore events.")
 
-# Sidebar with stats and info
+# Sidebar with stats, login, and info
 with st.sidebar:
+    # Fun fake login section
+    st.markdown("### 👋 Welcome!")
+    
+    if 'logged_in' not in st.session_state:
+        st.session_state.logged_in = False
+    
+    if not st.session_state.logged_in:
+        username = st.text_input("Username", placeholder="Enter your username")
+        password = st.text_input("Password", type="password", placeholder="Enter password")
+        
+        col1, col2 = st.columns(2)
+        with col1:
+            if st.button("Login", key="login_btn"):
+                if username and password:  # Any username/password works!
+                    st.session_state.logged_in = True
+                    st.session_state.username = username
+                    st.rerun()
+                else:
+                    st.error("Please enter credentials")
+        with col2:
+            if st.button("Sign Up", key="signup_btn"):
+                st.info("Welcome! You're now signed up!")
+                st.session_state.logged_in = True
+                st.session_state.username = username if username else "New User"
+                st.rerun()
+    else:
+        st.success(f"Welcome back, {st.session_state.get('username', 'User')}!")
+        if st.button("Logout", key="logout_btn"):
+            st.session_state.logged_in = False
+            st.rerun()
+    
+    st.markdown("---")
+    
     st.header("📊 Quick Stats")
     
     total_events = len(df)
