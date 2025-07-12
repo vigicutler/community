@@ -13,7 +13,7 @@ st.set_page_config(
 # Custom CSS - Clean professional design like vigiwater.org
 st.markdown("""
 <style>
-    /* FUN, VIBRANT COLORS! */
+    /* VIBRANT COLOR PALETTE - USE ALL COLORS! */
     :root {
         --dark-olive: #4E5D46;
         --blue: #4E91B3;
@@ -28,35 +28,35 @@ st.markdown("""
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
     
-    /* Fun header with gradient */
+    /* BLUE to DARK OLIVE header gradient */
     .main-header {
-        background: linear-gradient(135deg, var(--coral) 0%, var(--orange) 100%);
+        background: linear-gradient(135deg, var(--blue) 0%, var(--dark-olive) 100%);
         color: white;
         padding: 2.5rem;
         border-radius: 15px;
         text-align: center;
         margin-bottom: 2rem;
-        box-shadow: 0 8px 25px rgba(217, 139, 115, 0.3);
+        box-shadow: 0 8px 25px rgba(78, 145, 179, 0.3);
     }
     
-    /* Bright search container */
+    /* WARM BROWN border search container */
     .search-container {
-        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        background: white;
         padding: 2rem;
         border-radius: 15px;
-        border: 2px solid var(--coral);
+        border: 3px solid var(--warm-brown);
         margin-bottom: 2rem;
-        box-shadow: 0 4px 15px rgba(217, 139, 115, 0.1);
+        box-shadow: 0 4px 15px rgba(141, 113, 109, 0.1);
     }
     
-    /* Vibrant event cards */
+    /* CORAL border event cards */
     .event-card {
         background: white;
         border-radius: 15px;
         padding: 1.5rem;
         margin-bottom: 1.5rem;
         border: 1px solid #e9ecef;
-        border-left: 5px solid var(--blue);
+        border-left: 5px solid var(--coral);
         box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         transition: transform 0.2s ease;
     }
@@ -85,7 +85,7 @@ st.markdown("""
         margin-bottom: 0.8rem;
     }
     
-    /* Fun colorful tags */
+    /* ORANGE to CORAL gradient tags */
     .tag {
         background: linear-gradient(45deg, var(--orange), var(--coral));
         color: white;
@@ -99,11 +99,11 @@ st.markdown("""
         box-shadow: 0 2px 8px rgba(253, 167, 103, 0.3);
     }
     
-    /* Readable form inputs */
+    /* WARM BROWN border inputs */
     .stTextInput > div > div > input {
         background-color: white !important;
         color: #212529 !important;
-        border: 2px solid var(--coral) !important;
+        border: 2px solid var(--warm-brown) !important;
         border-radius: 10px !important;
         font-weight: 500 !important;
     }
@@ -111,7 +111,7 @@ st.markdown("""
     .stSelectbox > div > div {
         background-color: white !important;
         color: #212529 !important;
-        border: 2px solid var(--coral) !important;
+        border: 2px solid var(--warm-brown) !important;
         border-radius: 10px !important;
     }
     
@@ -121,9 +121,9 @@ st.markdown("""
         font-weight: 500 !important;
     }
     
-    /* Fun, colorful buttons */
+    /* ORANGE buttons */
     .stButton > button {
-        background: linear-gradient(45deg, var(--orange), var(--coral)) !important;
+        background-color: var(--orange) !important;
         color: white !important;
         border: none !important;
         border-radius: 10px !important;
@@ -134,19 +134,24 @@ st.markdown("""
     }
     
     .stButton > button:hover {
+        background-color: var(--coral) !important;
         transform: translateY(-2px) !important;
         box-shadow: 0 6px 20px rgba(253, 167, 103, 0.4) !important;
     }
     
-    /* Primary search button */
+    /* BLUE primary search button */
     div[data-testid="stButton"] button[kind="primary"] {
-        background: linear-gradient(45deg, var(--blue), var(--dark-olive)) !important;
+        background-color: var(--blue) !important;
         box-shadow: 0 4px 15px rgba(78, 145, 179, 0.3) !important;
     }
     
-    /* CORAL SIDEBAR - FUN AND BRIGHT! */
+    div[data-testid="stButton"] button[kind="primary"]:hover {
+        background-color: var(--dark-olive) !important;
+    }
+    
+    /* DARK OLIVE SIDEBAR with WHITE TEXT - READABLE! */
     .css-1d391kg {
-        background: linear-gradient(180deg, var(--coral) 0%, var(--orange) 100%) !important;
+        background-color: var(--dark-olive) !important;
     }
     
     .css-1d391kg .stMarkdown, 
@@ -156,27 +161,46 @@ st.markdown("""
     .css-1d391kg h1,
     .css-1d391kg h2,
     .css-1d391kg h3,
-    .css-1d391kg h4 {
+    .css-1d391kg h4,
+    .css-1d391kg label {
         color: white !important;
         font-weight: 500 !important;
     }
     
-    /* Bright metrics */
+    .css-1d391kg .stMetric label {
+        color: white !important;
+        font-weight: 600 !important;
+    }
+    
+    .css-1d391kg .stMetric [data-testid="metric-value"] {
+        color: white !important;
+        font-size: 2rem !important;
+        font-weight: 700 !important;
+    }
+    
+    /* WHITE sidebar inputs - readable! */
+    .css-1d391kg .stTextInput > div > div > input {
+        background-color: white !important;
+        color: #212529 !important;
+        border: 2px solid var(--coral) !important;
+    }
+    
+    /* CORAL metrics with white background */
     div[data-testid="metric-container"] {
-        background: white;
+        background: white !important;
         border-radius: 12px;
         padding: 1.2rem;
-        border-left: 4px solid var(--orange);
-        border: 2px solid var(--coral);
-        box-shadow: 0 4px 15px rgba(217, 139, 115, 0.1);
+        border: 3px solid var(--coral) !important;
+        box-shadow: 0 4px 15px rgba(217, 139, 115, 0.2);
+        margin-bottom: 1rem !important;
     }
     
     div[data-testid="metric-container"] > div {
-        color: var(--dark-olive);
-        font-weight: 600;
+        color: var(--dark-olive) !important;
+        font-weight: 600 !important;
     }
     
-    /* Fun rating display */
+    /* ORANGE rating display */
     .rating-display {
         color: var(--orange);
         font-size: 1.2rem;
@@ -189,7 +213,7 @@ st.markdown("""
     footer {visibility: hidden;}
     header {visibility: hidden;}
     
-    /* Make all text readable */
+    /* Make main text readable */
     .stMarkdown, .stText, p, div {
         color: #212529 !important;
     }
