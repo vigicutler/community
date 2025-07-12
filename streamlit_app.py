@@ -240,43 +240,56 @@ st.markdown("""
         border: 2px solid var(--coral) !important;
     }
     
-    /* WHITE sidebar selectbox with dark text - READABLE! */
-    .css-1d391kg .stSelectbox > div > div {
+    /* NUCLEAR OPTION FOR DROPDOWNS - OVERRIDE EVERYTHING! */
+    section[data-testid="stSidebar"] .stSelectbox > div > div,
+    section[data-testid="stSidebar"] .stSelectbox > div > div > div,
+    section[data-testid="stSidebar"] .stSelectbox > div > div > div > div,
+    section[data-testid="stSidebar"] .stSelectbox select,
+    section[data-testid="stSidebar"] .stSelectbox option,
+    .css-1d391kg .stSelectbox > div > div,
+    .css-1d391kg .stSelectbox > div > div > div,
+    .css-1d391kg .stSelectbox > div > div > div > div,
+    .css-1d391kg .stSelectbox select,
+    .css-1d391kg .stSelectbox option {
         background-color: white !important;
+        background: white !important;
         color: #212529 !important;
         border: 2px solid var(--coral) !important;
     }
     
-    .css-1d391kg .stSelectbox select {
+    /* Target dropdown menu specifically */
+    section[data-testid="stSidebar"] div[data-baseweb="select"],
+    section[data-testid="stSidebar"] div[data-baseweb="select"] > div,
+    section[data-testid="stSidebar"] div[data-baseweb="select"] div,
+    section[data-testid="stSidebar"] div[data-baseweb="popover"],
+    section[data-testid="stSidebar"] div[data-baseweb="popover"] div,
+    section[data-testid="stSidebar"] ul[data-baseweb="menu"],
+    section[data-testid="stSidebar"] ul[data-baseweb="menu"] li,
+    .css-1d391kg div[data-baseweb="select"],
+    .css-1d391kg div[data-baseweb="select"] > div,
+    .css-1d391kg div[data-baseweb="select"] div,
+    .css-1d391kg div[data-baseweb="popover"],
+    .css-1d391kg div[data-baseweb="popover"] div,
+    .css-1d391kg ul[data-baseweb="menu"],
+    .css-1d391kg ul[data-baseweb="menu"] li {
         background-color: white !important;
+        background: white !important;
         color: #212529 !important;
     }
     
-    /* WHITE dropdown options - READABLE! */
-    .css-1d391kg .stSelectbox div[data-baseweb="select"] > div {
+    /* Target ANY dropdown in sidebar */
+    section[data-testid="stSidebar"] .stSelectbox *,
+    .css-1d391kg .stSelectbox * {
         background-color: white !important;
+        background: white !important;
         color: #212529 !important;
     }
     
-    /* WHITE dropdown menu when opened */
-    .css-1d391kg .stSelectbox ul {
+    /* Override any dark theme */
+    section[data-testid="stSidebar"] [data-testid="stSelectbox"] *,
+    .css-1d391kg [data-testid="stSelectbox"] * {
         background-color: white !important;
-        color: #212529 !important;
-    }
-    
-    .css-1d391kg .stSelectbox li {
-        background-color: white !important;
-        color: #212529 !important;
-    }
-    
-    /* Force all selectbox components to be readable */
-    section[data-testid="stSidebar"] .stSelectbox * {
-        background-color: white !important;
-        color: #212529 !important;
-    }
-    
-    section[data-testid="stSidebar"] .stSelectbox div {
-        background-color: white !important;
+        background: white !important;
         color: #212529 !important;
     }
     
