@@ -233,11 +233,51 @@ st.markdown("""
         font-weight: 700 !important;
     }
     
-    /* WHITE sidebar inputs */
+    /* WHITE sidebar inputs with dark text - READABLE! */
     .css-1d391kg .stTextInput > div > div > input {
         background-color: white !important;
         color: #212529 !important;
         border: 2px solid var(--coral) !important;
+    }
+    
+    /* WHITE sidebar selectbox with dark text - READABLE! */
+    .css-1d391kg .stSelectbox > div > div {
+        background-color: white !important;
+        color: #212529 !important;
+        border: 2px solid var(--coral) !important;
+    }
+    
+    .css-1d391kg .stSelectbox select {
+        background-color: white !important;
+        color: #212529 !important;
+    }
+    
+    /* WHITE dropdown options - READABLE! */
+    .css-1d391kg .stSelectbox div[data-baseweb="select"] > div {
+        background-color: white !important;
+        color: #212529 !important;
+    }
+    
+    /* WHITE dropdown menu when opened */
+    .css-1d391kg .stSelectbox ul {
+        background-color: white !important;
+        color: #212529 !important;
+    }
+    
+    .css-1d391kg .stSelectbox li {
+        background-color: white !important;
+        color: #212529 !important;
+    }
+    
+    /* Force all selectbox components to be readable */
+    section[data-testid="stSidebar"] .stSelectbox * {
+        background-color: white !important;
+        color: #212529 !important;
+    }
+    
+    section[data-testid="stSidebar"] .stSelectbox div {
+        background-color: white !important;
+        color: #212529 !important;
     }
     
     /* WHITE metrics with coral border */
