@@ -770,7 +770,7 @@ with st.sidebar:
     
     st.markdown("---")
     
-    st.header("Quick Stats")
+    st.header("📊 Quick Stats")
     
     total_events = len(df)
     st.metric("Total Opportunities", total_events)
@@ -788,7 +788,7 @@ with st.sidebar:
             st.metric("Top Location", top_location)
     
     st.markdown("---")
-    st.header("Tips")
+    st.header("💡 Tips")
     st.markdown("""
     **Great search terms:**
     - kids, children, youth
