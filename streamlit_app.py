@@ -140,9 +140,28 @@ st.markdown("""
         color: white !important;
     }
     
-    /* Sidebar */
+    /* Sidebar - DARK BACKGROUND = LIGHT TEXT */
     .css-1d391kg {
-        background-color: var(--warm-brown);
+        background-color: var(--warm-brown) !important;
+    }
+    
+    .css-1d391kg .stMarkdown, 
+    .css-1d391kg .stText, 
+    .css-1d391kg p, 
+    .css-1d391kg div,
+    .css-1d391kg h1,
+    .css-1d391kg h2,
+    .css-1d391kg h3,
+    .css-1d391kg h4 {
+        color: white !important;
+    }
+    
+    .css-1d391kg .stMetric label {
+        color: white !important;
+    }
+    
+    .css-1d391kg .stMetric [data-testid="metric-value"] {
+        color: white !important;
     }
     
     /* Metrics */
