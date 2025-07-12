@@ -338,37 +338,8 @@ if search_button or search_query:
                                 st.rerun()
         else:
             st.info("🔍 No exact matches found. Try different keywords like 'kids', 'environment', 'food', or 'animals'")
-    else:
-        st.warning("⚠️ Please enter what you'd like to volunteer for!")
-
 else:
-    # Default view - show featured opportunities
-    st.markdown("---")
-    st.subheader("🌟 Featured Volunteer Opportunities")
-    st.markdown("*Explore these amazing ways to make a difference in NYC:*")
-    
-    # Display featured events in a nice grid
-    featured_events = df.head(6)
-    
-    cols = st.columns(2)
-    
-    for idx, (_, event) in enumerate(featured_events.iterrows()):
-        with cols[idx % 2]:
-            with st.container():
-                st.markdown(f"""
-                **🌟 {event['title']}**
-                
-                🏢 **{event['org_title']}**
-                
-                📍 {event['location_display']}
-                
-                📝 {event.get('short_description', event.get('description', '')[:120] + "...")}
-                """)
-                
-                if st.button(f"Learn More", key=f"featured_{idx}"):
-                    st.info(f"Contact {event['org_title']} to volunteer for {event['title']}!")
-                
-                st.markdown("---")
+    st.info("Enter a topic like \"food\", \"kids\", \"Inwood\", etc. to explore events.")
 
 # Sidebar with stats and info
 with st.sidebar:
