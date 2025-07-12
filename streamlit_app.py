@@ -10,7 +10,7 @@ st.set_page_config(
     layout="wide"
 )
 
-# Custom CSS with YOUR beautiful color palette!
+# Custom CSS with YOUR beautiful color palette - CLEAN VERSION!
 st.markdown("""
 <style>
     /* Your gorgeous color palette */
@@ -22,20 +22,19 @@ st.markdown("""
         --orange: #FDA767;
     }
     
-    /* Main app styling */
+    /* Clean main app styling */
     .stApp {
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        background-color: #fafafa;
     }
     
-    /* Header styling */
+    /* Clean header styling */
     .main-header {
-        background: linear-gradient(135deg, var(--dark-olive) 0%, var(--blue) 100%);
+        background-color: var(--dark-olive);
         color: white;
         padding: 2rem;
-        border-radius: 15px;
+        border-radius: 10px;
         text-align: center;
         margin-bottom: 2rem;
-        box-shadow: 0 8px 25px rgba(78, 93, 70, 0.3);
     }
     
     .main-header h1 {
@@ -50,30 +49,23 @@ st.markdown("""
         opacity: 0.9;
     }
     
-    /* Search container */
+    /* Clean search container */
     .search-container {
         background: white;
         padding: 1.5rem;
-        border-radius: 15px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        border-radius: 10px;
+        border: 1px solid #e0e0e0;
         margin-bottom: 2rem;
-        border-left: 5px solid var(--blue);
     }
     
-    /* Event cards */
+    /* Clean event cards */
     .event-card {
         background: white;
-        border-radius: 15px;
+        border-radius: 10px;
         padding: 1.5rem;
         margin-bottom: 1.5rem;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        border-left: 4px solid var(--coral);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    
-    .event-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        border: 1px solid #e0e0e0;
+        border-left: 4px solid var(--blue);
     }
     
     .event-title {
@@ -84,102 +76,88 @@ st.markdown("""
     }
     
     .event-org {
-        color: var(--blue);
+        color: var(--warm-brown);
         font-weight: 500;
         margin-bottom: 0.3rem;
     }
     
     .event-location {
-        color: var(--warm-brown);
+        color: var(--blue);
         font-weight: 500;
         margin-bottom: 0.8rem;
     }
     
-    /* Tags styling */
-    .event-tags {
-        margin: 0.8rem 0;
-    }
-    
+    /* Clean tags styling */
     .tag {
-        background: linear-gradient(45deg, var(--orange), var(--coral));
+        background-color: var(--coral);
         color: white;
         padding: 0.3rem 0.8rem;
-        border-radius: 20px;
+        border-radius: 15px;
         font-size: 0.85rem;
         font-weight: 500;
         margin-right: 0.5rem;
         margin-bottom: 0.3rem;
         display: inline-block;
-        box-shadow: 0 2px 8px rgba(253, 167, 103, 0.3);
     }
     
-    /* Buttons */
+    /* Clean buttons */
     .stButton > button {
-        background: linear-gradient(45deg, var(--blue), var(--coral)) !important;
+        background-color: var(--orange) !important;
         color: white !important;
         border: none !important;
-        border-radius: 10px !important;
+        border-radius: 8px !important;
         padding: 0.6rem 1.5rem !important;
         font-weight: 600 !important;
-        transition: all 0.3s ease !important;
-        box-shadow: 0 4px 15px rgba(78, 145, 179, 0.3) !important;
     }
     
     .stButton > button:hover {
-        transform: translateY(-2px) !important;
-        box-shadow: 0 6px 20px rgba(78, 145, 179, 0.4) !important;
+        background-color: var(--coral) !important;
     }
     
     /* Primary button (Explore) */
     div[data-testid="stButton"] button[kind="primary"] {
-        background: linear-gradient(45deg, var(--orange), var(--coral)) !important;
-        box-shadow: 0 4px 15px rgba(253, 167, 103, 0.4) !important;
+        background-color: var(--blue) !important;
     }
     
-    /* Sidebar styling */
+    div[data-testid="stButton"] button[kind="primary"]:hover {
+        background-color: var(--dark-olive) !important;
+    }
+    
+    /* Clean sidebar styling */
     .css-1d391kg {
-        background: linear-gradient(180deg, var(--dark-olive) 0%, var(--warm-brown) 100%);
+        background-color: var(--warm-brown);
     }
     
-    .sidebar .sidebar-content {
-        background: transparent;
-        color: white;
-    }
-    
-    /* Metrics styling */
+    /* Clean metrics styling */
     div[data-testid="metric-container"] {
         background: white;
-        border-radius: 10px;
+        border-radius: 8px;
         padding: 1rem;
-        border-left: 4px solid var(--blue);
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        border-left: 3px solid var(--orange);
+        border: 1px solid #e0e0e0;
     }
     
     div[data-testid="metric-container"] > div {
         color: var(--dark-olive);
     }
     
-    /* Form controls */
+    /* Clean form controls */
     .stSelectbox > div > div {
-        border-radius: 10px;
-        border: 2px solid #e0e0e0;
-        transition: border-color 0.3s ease;
+        border-radius: 8px;
+        border: 1px solid #ccc;
     }
     
     .stSelectbox > div > div:focus-within {
         border-color: var(--blue);
-        box-shadow: 0 0 0 2px rgba(78, 145, 179, 0.2);
     }
     
     .stTextInput > div > div {
-        border-radius: 10px;
-        border: 2px solid #e0e0e0;
-        transition: border-color 0.3s ease;
+        border-radius: 8px;
+        border: 1px solid #ccc;
     }
     
     .stTextInput > div > div:focus-within {
-        border-color: var(--coral);
-        box-shadow: 0 0 0 2px rgba(217, 139, 115, 0.2);
+        border-color: var(--blue);
     }
     
     /* Rating stars */
@@ -189,61 +167,20 @@ st.markdown("""
         font-weight: bold;
     }
     
-    /* Success messages */
-    .stSuccess {
-        background: linear-gradient(45deg, #d4edda, #c3e6cb);
-        border-left: 4px solid var(--blue);
-        border-radius: 10px;
-    }
-    
-    /* Info messages */
-    .stInfo {
-        background: linear-gradient(45deg, #d1ecf1, #bee5eb);
-        border-left: 4px solid var(--blue);
-        border-radius: 10px;
-    }
-    
-    /* Footer styling */
+    /* Clean footer styling */
     .footer {
-        background: linear-gradient(135deg, var(--dark-olive) 0%, var(--warm-brown) 100%);
+        background-color: var(--dark-olive);
         color: white;
         padding: 2rem;
-        border-radius: 15px;
+        border-radius: 10px;
         text-align: center;
         margin-top: 3rem;
-        box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
     }
     
     /* Hide Streamlit branding */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     header {visibility: hidden;}
-    
-    /* Quick search buttons */
-    .quick-search-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        margin: 1rem 0;
-    }
-    
-    .quick-search-btn {
-        background: linear-gradient(45deg, var(--warm-brown), var(--coral));
-        color: white;
-        padding: 0.5rem 1rem;
-        border-radius: 20px;
-        border: none;
-        font-size: 0.9rem;
-        font-weight: 500;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 8px rgba(141, 113, 109, 0.3);
-    }
-    
-    .quick-search-btn:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(141, 113, 109, 0.4);
-    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -629,6 +566,10 @@ with st.sidebar:
 st.markdown("""
 <div class="footer">
     <h3>🌱 NYC Community Event Agent</h3>
+    <p><em>Connecting volunteers with meaningful opportunities across New York City</em></p>
+    <p>💚 <strong>Built with love for the community</strong> 💚</p>
+</div>
+""", unsafe_allow_html=True)
     <p><em>Connecting volunteers with meaningful opportunities across New York City</em></p>
     <p>💚 <strong>Built with love for the community</strong> 💚</p>
 </div>
