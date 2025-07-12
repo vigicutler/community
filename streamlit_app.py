@@ -816,3 +816,7 @@ st.markdown("""
 <p><strong>Built with love for the community</strong></p>
 </div>
 """, unsafe_allow_html=True)
+<p><em>Connecting volunteers with meaningful opportunities across New York City</em></p>
+<p><strong>Built with love for the community</strong></p>
+</div>
+""", unsafe_allow_html=True)
