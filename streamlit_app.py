@@ -10,10 +10,10 @@ st.set_page_config(
     layout="wide"
 )
 
-# Custom CSS with YOUR beautiful color palette - CLEAN VERSION!
+# Custom CSS - Clean professional design like vigiwater.org
 st.markdown("""
 <style>
-    /* Your gorgeous color palette */
+    /* Clean, modern color palette */
     :root {
         --dark-olive: #4E5D46;
         --blue: #4E91B3;
@@ -22,99 +22,110 @@ st.markdown("""
         --orange: #FDA767;
     }
     
-    /* Clean main app styling */
+    /* Clean main app */
     .stApp {
-        background-color: #fafafa;
+        background-color: #ffffff;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
     
-    /* Clean header styling */
+    /* Clean header */
     .main-header {
         background-color: var(--dark-olive);
         color: white;
         padding: 2rem;
-        border-radius: 10px;
+        border-radius: 12px;
         text-align: center;
         margin-bottom: 2rem;
     }
     
-    .main-header h1 {
-        margin: 0;
-        font-size: 2.5rem;
-        font-weight: 700;
-    }
-    
-    .main-header p {
-        margin: 0.5rem 0 0 0;
-        font-size: 1.2rem;
-        opacity: 0.9;
-    }
-    
-    /* Clean search container */
+    /* Search container */
     .search-container {
-        background: white;
-        padding: 1.5rem;
-        border-radius: 10px;
-        border: 1px solid #e0e0e0;
+        background: #f8f9fa;
+        padding: 2rem;
+        border-radius: 12px;
+        border: 1px solid #e9ecef;
         margin-bottom: 2rem;
     }
     
-    /* Clean event cards */
+    /* Event cards */
     .event-card {
         background: white;
-        border-radius: 10px;
+        border-radius: 12px;
         padding: 1.5rem;
         margin-bottom: 1.5rem;
-        border: 1px solid #e0e0e0;
+        border: 1px solid #e9ecef;
         border-left: 4px solid var(--blue);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
     
     .event-title {
         color: var(--dark-olive);
-        font-size: 1.4rem;
+        font-size: 1.3rem;
         font-weight: 600;
         margin-bottom: 0.5rem;
     }
     
     .event-org {
-        color: var(--warm-brown);
+        color: var(--blue);
         font-weight: 500;
         margin-bottom: 0.3rem;
     }
     
     .event-location {
-        color: var(--blue);
+        color: var(--warm-brown);
         font-weight: 500;
         margin-bottom: 0.8rem;
     }
     
-    /* Clean tags styling */
+    /* Tags */
     .tag {
         background-color: var(--coral);
         color: white;
-        padding: 0.3rem 0.8rem;
-        border-radius: 15px;
-        font-size: 0.85rem;
+        padding: 0.25rem 0.75rem;
+        border-radius: 12px;
+        font-size: 0.8rem;
         font-weight: 500;
         margin-right: 0.5rem;
         margin-bottom: 0.3rem;
         display: inline-block;
     }
     
-    /* Clean buttons */
+    /* Fix ALL text inputs and selects to be readable */
+    .stTextInput > div > div > input {
+        background-color: white !important;
+        color: #212529 !important;
+        border: 1px solid #ced4da !important;
+        border-radius: 8px !important;
+    }
+    
+    .stSelectbox > div > div {
+        background-color: white !important;
+        color: #212529 !important;
+        border: 1px solid #ced4da !important;
+        border-radius: 8px !important;
+    }
+    
+    .stSelectbox select {
+        background-color: white !important;
+        color: #212529 !important;
+    }
+    
+    /* Buttons */
     .stButton > button {
         background-color: var(--orange) !important;
         color: white !important;
         border: none !important;
         border-radius: 8px !important;
-        padding: 0.6rem 1.5rem !important;
+        padding: 0.6rem 1.2rem !important;
         font-weight: 600 !important;
+        transition: background-color 0.2s ease !important;
     }
     
     .stButton > button:hover {
         background-color: var(--coral) !important;
     }
     
-    /* Primary button (Explore) */
+    /* Primary button */
     div[data-testid="stButton"] button[kind="primary"] {
         background-color: var(--blue) !important;
     }
@@ -123,92 +134,48 @@ st.markdown("""
         background-color: var(--dark-olive) !important;
     }
     
-    /* Clean sidebar styling */
+    /* Quick search buttons */
+    .stButton > button:not([kind="primary"]) {
+        background-color: var(--dark-olive) !important;
+        color: white !important;
+    }
+    
+    /* Sidebar */
     .css-1d391kg {
         background-color: var(--warm-brown);
     }
     
-    /* Clean metrics styling */
+    /* Metrics */
     div[data-testid="metric-container"] {
         background: white;
         border-radius: 8px;
         padding: 1rem;
         border-left: 3px solid var(--orange);
-        border: 1px solid #e0e0e0;
+        border: 1px solid #e9ecef;
     }
     
-    div[data-testid="metric-container"] > div {
-        color: var(--dark-olive);
-    }
-    
-    /* Clean form controls - LIGHT backgrounds with readable text */
-    .stSelectbox > div > div {
-        background-color: white !important;
-        color: #333 !important;
-        border-radius: 8px;
-        border: 1px solid #ccc;
-    }
-    
-    .stSelectbox > div > div:focus-within {
-        border-color: var(--blue);
-    }
-    
-    .stTextInput > div > div {
-        background-color: white !important;
-        color: #333 !important;
-        border-radius: 8px;
-        border: 1px solid #ccc;
-    }
-    
-    .stTextInput > div > div:focus-within {
-        border-color: var(--blue);
-    }
-    
-    .stTextInput input {
-        background-color: white !important;
-        color: #333 !important;
-    }
-    
-    .stSelectbox select {
-        background-color: white !important;
-        color: #333 !important;
-    }
-    
-    /* Quick search buttons - use dark olive like you suggested */
-    .stButton > button:not([kind="primary"]) {
-        background-color: var(--dark-olive) !important;
-        color: white !important;
-        border: none !important;
-        border-radius: 8px !important;
-        padding: 0.6rem 1.2rem !important;
-        font-weight: 600 !important;
-    }
-    
-    .stButton > button:not([kind="primary"]):hover {
-        background-color: var(--warm-brown) !important;
-    }
-    
-    /* Rating stars */
+    /* Rating display */
     .rating-display {
         color: var(--orange);
         font-size: 1.1rem;
         font-weight: bold;
     }
     
-    /* Clean footer styling */
-    .footer {
-        background-color: var(--dark-olive);
-        color: white;
-        padding: 2rem;
-        border-radius: 10px;
-        text-align: center;
-        margin-top: 3rem;
-    }
-    
-    /* Hide Streamlit branding */
+    /* Hide Streamlit elements */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     header {visibility: hidden;}
+    
+    /* Ensure all text is readable */
+    .stMarkdown, .stText, p, div {
+        color: #212529 !important;
+    }
+    
+    /* Fix label colors */
+    label {
+        color: #495057 !important;
+        font-weight: 500 !important;
+    }
 </style>
 """, unsafe_allow_html=True)
 
