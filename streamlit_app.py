@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import os
+from datetime import datetime
 
 # Page config
 st.set_page_config(
@@ -11,7 +12,40 @@ st.set_page_config(
 
 # Title
 st.title("🌱 NYC Community Event Agent")
-st.markdown("**Find meaningful volunteer opportunities in New York City**")
+st.markdown("**Choose how you'd like to help and find meaningful events near you.**")
+
+# === Community Rating System ===
+FEEDBACK_CSV = "feedback_backup.csv"
+
+def ensure_feedback_csv():
+    if not os.path.exists(FEEDBACK_CSV):
+        pd.DataFrame(columns=["event_id", "rating", "comment", "timestamp"]).to_csv(FEEDBACK_CSV, index=False)
+
+def load_feedback():
+    if os.path.exists(FEEDBACK_CSV):
+        return pd.read_csv(FEEDBACK_CSV)
+    return pd.DataFrame(columns=["event_id", "rating", "comment", "timestamp"])
+
+def save_feedback(df):
+    df.to_csv(FEEDBACK_CSV, index=False)
+
+def store_feedback(event_id, rating, comment):
+    df = load_feedback()
+    timestamp = datetime.utcnow().isoformat()
+    idx = df[df.event_id == event_id].index
+    if len(idx):
+        df.loc[idx, ["rating", "comment", "timestamp"]] = [rating, comment, timestamp]
+    else:
+        new_row = pd.DataFrame([{"event_id": event_id, "rating": rating, "comment": comment, "timestamp": timestamp}])
+        df = pd.concat([df, new_row], ignore_index=True)
+    save_feedback(df)
+
+def get_event_rating(event_id):
+    df = load_feedback()
+    ratings = df[df.event_id == event_id]["rating"]
+    return round(ratings.mean(), 2) if not ratings.empty else None
+
+ensure_feedback_csv()
 
 # Initialize session state
 if 'loaded_data' not in st.session_state:
@@ -48,6 +82,9 @@ def load_volunteer_data():
     for col in text_columns:
         if col in merged_df.columns:
             merged_df[col] = merged_df[col].astype(str)
+    
+    # Create event IDs for ratings
+    merged_df['event_id'] = merged_df['opportunity_id'].astype(str) + "_" + merged_df['title'].str[:10]
     
     # Create short description
     merged_df['short_description'] = merged_df['description'].str[:150] + "..."
@@ -140,18 +177,37 @@ def create_sample_data():
 with st.spinner("🔄 Loading your volunteer opportunities..."):
     df = load_volunteer_data()
 
-# Search interface
+# Search interface with ALL your original filters
 st.markdown("---")
 col1, col2 = st.columns([3, 1])
 
 with col1:
     search_query = st.text_input(
-        "🔍 **What would you like to volunteer for?**",
+        "👋️ How can I help?",
         placeholder="e.g., help kids, environment, animals, food bank, elderly care..."
     )
 
 with col2:
     search_button = st.button("🚀 **Search**", type="primary", use_container_width=True)
+
+# Your original filter options
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    # Mood/Intent dropdown (your core feature!)
+    mood_options = ["(no preference)"]
+    if 'Mood/Intent' in df.columns:
+        unique_moods = [m for m in df['Mood/Intent'].unique() if m and str(m) != 'nan' and str(m) != '']
+        mood_options.extend(sorted(unique_moods))
+    mood_input = st.selectbox("🌫️ Optional — Set an Intention", mood_options)
+
+with col2:
+    # ZIP Code filter (your core feature!)
+    zipcode_input = st.text_input("📍 Optional — ZIP Code", placeholder="e.g. 10027")
+
+with col3:
+    # Weather filter (your core feature!)
+    weather_filter = st.selectbox("☀️ Filter by Weather Option", ["", "Indoors", "Outdoors", "Flexible"])
 
 # Quick search buttons
 st.markdown("**Quick searches:**")
@@ -164,21 +220,38 @@ for i, topic in enumerate(quick_searches):
             search_query = topic.lower()
             search_button = True
 
-# Perform search
+# Perform search with ALL your filters
 if search_button or search_query:
     if search_query:
-        # Search logic
+        # Search logic with your original filtering
         query_lower = search_query.lower()
         
-        # Create search mask
-        mask = (
-            df['title'].str.lower().str.contains(query_lower, na=False) |
-            df['description'].str.lower().str.contains(query_lower, na=False) |
-            df.get('Topical Theme', pd.Series(dtype='str')).str.lower().str.contains(query_lower, na=False) |
-            df.get('Mood/Intent', pd.Series(dtype='str')).str.lower().str.contains(query_lower, na=False)
+        # Start with all events
+        results = df.copy()
+        
+        # Apply your original filters
+        if mood_input != "(no preference)":
+            results = results[results['Mood/Intent'].str.contains(mood_input, na=False, case=False)]
+        
+        if zipcode_input:
+            # Filter by ZIP code if Postcode column exists
+            if 'Postcode' in results.columns:
+                results = results[results['Postcode'].astype(str).str.startswith(zipcode_input, na=False)]
+        
+        if weather_filter:
+            # Filter by weather if Weather Badge column exists
+            if 'Weather Badge' in results.columns:
+                results = results[results['Weather Badge'].str.contains(weather_filter, na=False, case=False)]
+        
+        # Text search
+        text_mask = (
+            results['title'].str.lower().str.contains(query_lower, na=False) |
+            results['description'].str.lower().str.contains(query_lower, na=False) |
+            results.get('Topical Theme', pd.Series(dtype='str')).str.lower().str.contains(query_lower, na=False) |
+            results.get('Mood/Intent', pd.Series(dtype='str')).str.lower().str.contains(query_lower, na=False)
         )
         
-        results = df[mask]
+        results = results[text_mask]
         
         if len(results) == 0:
             # Try individual words if no results
@@ -188,7 +261,17 @@ if search_button or search_query:
                     df['title'].str.lower().str.contains(word, na=False) |
                     df['description'].str.lower().str.contains(word, na=False)
                 )
-                results = pd.concat([results, df[word_mask]]).drop_duplicates()
+                word_results = df[word_mask]
+                
+                # Apply filters to word results too
+                if mood_input != "(no preference)":
+                    word_results = word_results[word_results['Mood/Intent'].str.contains(mood_input, na=False, case=False)]
+                if zipcode_input and 'Postcode' in word_results.columns:
+                    word_results = word_results[word_results['Postcode'].astype(str).str.startswith(zipcode_input, na=False)]
+                if weather_filter and 'Weather Badge' in word_results.columns:
+                    word_results = word_results[word_results['Weather Badge'].str.contains(weather_filter, na=False, case=False)]
+                
+                results = pd.concat([results, word_results]).drop_duplicates()
         
         # Display results
         st.markdown("---")
@@ -213,8 +296,21 @@ if search_button or search_query:
                             if 'Mood/Intent' in event and event['Mood/Intent']:
                                 st.markdown(f"**💭 Type:** `{event['Mood/Intent']}`")
                             
+                            # Your original tags display
+                            tags = []
+                            for tag_col in ['Topical Theme', 'Effort Estimate', 'Weather Badge']:
+                                if tag_col in event and event[tag_col] and str(event[tag_col]) != 'nan':
+                                    tags.append(f"`{event[tag_col]}`")
+                            if tags:
+                                st.markdown(f"🏷️ {' '.join(tags)}")
+                            
                             st.markdown(f"**📝 Description:**")
                             st.markdown(event.get('short_description', event.get('description', '')[:150] + "..."))
+                            
+                            # COMMUNITY RATING DISPLAY
+                            avg_rating = get_event_rating(event['event_id'])
+                            if avg_rating:
+                                st.markdown(f"⭐ **Community Rating:** {avg_rating}/5")
                         
                         with col2:
                             st.markdown("**🤝 Get Involved:**")
@@ -222,16 +318,24 @@ if search_button or search_query:
                             if st.button(f"I'm Interested!", key=f"interest_{idx}"):
                                 st.success("🎉 Great! Contact the organization to get started volunteering!")
                             
-                            # Simple rating
-                            rating = st.selectbox(
-                                "Rate this opportunity:",
-                                ["⭐", "⭐⭐", "⭐⭐⭐", "⭐⭐⭐⭐", "⭐⭐⭐⭐⭐"],
-                                key=f"rating_{idx}",
-                                index=2
+                            # YOUR ORIGINAL RATING SYSTEM
+                            st.markdown("**Rate this event:**")
+                            rating = st.slider(
+                                "Rating:",
+                                1, 5, 3,
+                                key=f"rating_{idx}"
                             )
                             
-                            if st.button(f"Submit Rating", key=f"submit_rating_{idx}"):
-                                st.success("✅ Thank you for your feedback!")
+                            comment = st.text_input(
+                                "Leave feedback:",
+                                key=f"comment_{idx}",
+                                placeholder="Optional comment..."
+                            )
+                            
+                            if st.button(f"Submit Feedback", key=f"submit_rating_{idx}"):
+                                store_feedback(event['event_id'], rating, comment)
+                                st.success("✅ Thanks for the feedback!")
+                                st.rerun()
         else:
             st.info("🔍 No exact matches found. Try different keywords like 'kids', 'environment', 'food', or 'animals'")
     else:
