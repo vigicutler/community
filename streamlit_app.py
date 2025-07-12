@@ -168,32 +168,71 @@ st.markdown("""
         color: #212529 !important;
     }
     
-    /* Force all multiselect text to be dark */
+    /* NUCLEAR OPTION FOR ALL DROPDOWNS - FORCE WHITE BACKGROUND AND DARK TEXT */
+    .stSelectbox *,
+    .stMultiSelect *,
+    div[data-baseweb="select"] *,
+    div[data-baseweb="popover"] *,
+    ul[data-baseweb="menu"] *,
+    div[role="combobox"] *,
+    div[role="listbox"] *,
+    div[role="option"] * {
+        background-color: white !important;
+        color: #212529 !important;
+    }
+    
+    /* Target the specific multiselect container */
+    .stMultiSelect > div {
+        background-color: white !important;
+    }
+    
+    .stMultiSelect > div > div {
+        background-color: white !important;
+        border: 2px solid var(--warm-brown) !important;
+        border-radius: 10px !important;
+    }
+    
     .stMultiSelect > div > div > div {
         background-color: white !important;
         color: #212529 !important;
     }
     
-    .stMultiSelect div[role="combobox"] {
+    /* Force all text inside multiselect to be dark */
+    .stMultiSelect span {
+        color: #212529 !important;
+    }
+    
+    .stMultiSelect div {
+        color: #212529 !important;
+    }
+    
+    /* Target the placeholder and selected text */
+    .stMultiSelect div[data-baseweb="select"] span {
+        color: #212529 !important;
+    }
+    
+    .stMultiSelect div[data-baseweb="select"] div {
+        color: #212529 !important;
+    }
+    
+    /* Override any inherited dark styling */
+    [data-testid="stMultiSelect"] * {
+        color: #212529 !important;
+        background-color: white !important;
+    }
+    
+    [data-testid="stSelectbox"] * {
+        color: #212529 !important;
+        background-color: white !important;
+    }
+    
+    /* Force dropdown items to be readable */
+    li[role="option"] {
         background-color: white !important;
         color: #212529 !important;
     }
     
-    .stMultiSelect div[role="combobox"] * {
-        color: #212529 !important;
-    }
-    
-    /* Multiselect dropdown items */
-    .stMultiSelect ul[data-baseweb="menu"] {
-        background-color: white !important;
-    }
-    
-    .stMultiSelect ul[data-baseweb="menu"] li {
-        background-color: white !important;
-        color: #212529 !important;
-    }
-    
-    .stMultiSelect ul[data-baseweb="menu"] li:hover {
+    li[role="option"]:hover {
         background-color: #f8f9fa !important;
         color: #212529 !important;
     }
