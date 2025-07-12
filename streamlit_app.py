@@ -101,6 +101,7 @@ st.markdown("""
         font-weight: 500 !important;
     }
     
+    /* MAIN SEARCH AREA DROPDOWNS - WHITE BACKGROUND, DARK TEXT */
     .stSelectbox > div > div {
         background-color: white !important;
         color: #212529 !important;
@@ -112,6 +113,42 @@ st.markdown("""
         background-color: white !important;
         color: #212529 !important;
         font-weight: 500 !important;
+    }
+    
+    /* DROPDOWN MENU OPTIONS - WHITE BACKGROUND, DARK TEXT */
+    .stSelectbox div[data-baseweb="select"] > div {
+        background-color: white !important;
+        color: #212529 !important;
+    }
+    
+    .stSelectbox div[data-baseweb="select"] div {
+        background-color: white !important;
+        color: #212529 !important;
+    }
+    
+    /* DROPDOWN POPUP MENU */
+    div[data-baseweb="popover"] {
+        background-color: white !important;
+    }
+    
+    div[data-baseweb="popover"] div {
+        background-color: white !important;
+        color: #212529 !important;
+    }
+    
+    ul[data-baseweb="menu"] {
+        background-color: white !important;
+    }
+    
+    ul[data-baseweb="menu"] li {
+        background-color: white !important;
+        color: #212529 !important;
+    }
+    
+    /* FORCE ALL DROPDOWN ELEMENTS TO BE READABLE */
+    .stSelectbox * {
+        background-color: white !important;
+        color: #212529 !important;
     }
     
     /* SOLID ORANGE buttons - NO GRADIENT */
